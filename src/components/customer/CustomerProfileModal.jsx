@@ -267,7 +267,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
     });
   };
 
-  // Export Tailor Job Card PDF
+  // Export Tailor Job Card PDF Ali brothers
   const handleExportJobCard = () => {
     const mockBooking = {
       bookingNo: `JOB-${customer.id}`,
