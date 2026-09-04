@@ -157,122 +157,229 @@ export const BookingView = () => {
 
       {/* Main Content Area */}
       {mainTab === 'bookings' ? (
-        /* Bookings Table */
-        <div className="card table-responsive">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Booking Ref</th>
-                <th>Customer Name</th>
-                <th>Garment & Fabric Details</th>
-                <th>Trial Date</th>
-                <th>Delivery Date</th>
-                <th>Agreed Total</th>
-                <th>Advance Paid</th>
-                <th>Balance Due</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBookings.length === 0 ? (
+        <>
+          {/* Desktop Bookings Table */}
+          <div className="card table-responsive desktop-only-table">
+            <table className="data-table">
+              <thead>
                 <tr>
-                  <td colSpan="10" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
-                    No custom bookings found for this filter.
-                  </td>
+                  <th>Booking Ref</th>
+                  <th>Customer Name</th>
+                  <th>Garment & Fabric Details</th>
+                  <th>Trial Date</th>
+                  <th>Delivery Date</th>
+                  <th>Agreed Total</th>
+                  <th>Advance Paid</th>
+                  <th>Balance Due</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ) : (
-                filteredBookings.map((b) => (
-                  <tr key={b.id}>
-                    <td>
-                      <strong style={{ color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{b.bookingNo || b.id}</strong>
-                    </td>
-                    <td>
-                      <div
-                        style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--primary)' }}
-                        onClick={() => {
-                          const matched = customers.find((c) => c.id === b.customerId || c.name === b.customerName);
-                          setSelectedCustomerFor360(matched || { id: b.customerId, name: b.customerName, phone: b.customerPhone, type: 'VIP Bespoke' });
-                        }}
-                        title="Click to view full 360° Customer Profile & Body Sizes"
-                      >
-                        {b.customerName}
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.customerPhone}</div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 600 }}>{b.garmentType}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.fabricDetails}</div>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.85rem' }}>
-                        <Clock size={12} color="#F59E0B" /> {formatDate(b.trialDate)}
-                      </div>
-                    </td>
-                    <td>
-                      <strong style={{ color: 'var(--text-main)' }}>{formatDate(b.deliveryDate)}</strong>
-                    </td>
-                    <td>
-                      <span className="font-mono">{formatCurrency(b.totalAmount, currency)}</span>
-                    </td>
-                    <td>
-                      <span style={{ color: '#10B981', fontWeight: 700 }} className="font-mono">
-                        {formatCurrency(b.advancePaid, currency)}
-                      </span>
-                    </td>
-                    <td>
-                      <span
-                        style={{
-                          color: b.balanceDue > 0 ? '#F43F5E' : '#10B981',
-                          fontWeight: 700,
-                        }}
-                        className="font-mono"
-                      >
-                        {formatCurrency(b.balanceDue, currency)}
-                      </span>
-                    </td>
-                    <td>
-                      <span
-                        className={`badge ${
-                          b.status === 'Delivered'
-                            ? 'badge-success'
-                            : b.status === 'Ready for Trial'
-                            ? 'badge-cyan'
-                            : b.status === 'In Production'
-                            ? 'badge-warning'
-                            : 'badge-primary'
-                        }`}
-                      >
-                        {b.status}
-                      </span>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: '6px' }}>
-                        <button
-                          className="btn btn-secondary btn-sm"
-                          onClick={() => handleJobCardDownload(b)}
-                          title="Download Cutting Sheet & Tailor Specs PDF"
-                        >
-                          <Download size={13} /> Job Card
-                        </button>
-
-                        {b.status !== 'Delivered' && (
-                          <button
-                            className="btn btn-success btn-sm"
-                            onClick={() => handleDeliverAndSettle(b)}
-                            title="Settle balance due and mark as delivered"
-                          >
-                            <CheckCircle2 size={13} /> Settle & Deliver
-                          </button>
-                        )}
-                      </div>
+              </thead>
+              <tbody>
+                {filteredBookings.length === 0 ? (
+                  <tr>
+                    <td colSpan="10" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
+                      No custom bookings found for this filter.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredBookings.map((b) => (
+                    <tr key={b.id}>
+                      <td>
+                        <strong style={{ color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{b.bookingNo || b.id}</strong>
+                      </td>
+                      <td>
+                        <div
+                          style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--primary)' }}
+                          onClick={() => {
+                            const matched = customers.find((c) => c.id === b.customerId || c.name === b.customerName);
+                            setSelectedCustomerFor360(matched || { id: b.customerId, name: b.customerName, phone: b.customerPhone, type: 'VIP Bespoke' });
+                          }}
+                          title="Click to view full 360° Customer Profile & Body Sizes"
+                        >
+                          {b.customerName}
+                        </div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.customerPhone}</div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600 }}>{b.garmentType}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.fabricDetails}</div>
+                      </td>
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.85rem' }}>
+                          <Clock size={12} color="#F59E0B" /> {formatDate(b.trialDate)}
+                        </div>
+                      </td>
+                      <td>
+                        <strong style={{ color: 'var(--text-main)' }}>{formatDate(b.deliveryDate)}</strong>
+                      </td>
+                      <td>
+                        <span className="font-mono">{formatCurrency(b.totalAmount, currency)}</span>
+                      </td>
+                      <td>
+                        <span style={{ color: '#10B981', fontWeight: 700 }} className="font-mono">
+                          {formatCurrency(b.advancePaid, currency)}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          style={{
+                            color: b.balanceDue > 0 ? '#F43F5E' : '#10B981',
+                            fontWeight: 700,
+                          }}
+                          className="font-mono"
+                        >
+                          {formatCurrency(b.balanceDue, currency)}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge ${
+                            b.status === 'Delivered'
+                              ? 'badge-success'
+                              : b.status === 'Ready for Trial'
+                              ? 'badge-cyan'
+                              : b.status === 'In Production'
+                              ? 'badge-warning'
+                              : 'badge-primary'
+                          }`}
+                        >
+                          {b.status}
+                        </span>
+                      </td>
+                      <td>
+                        <div style={{ display: 'flex', gap: '6px' }}>
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => handleJobCardDownload(b)}
+                            title="Download Cutting Sheet & Tailor Specs PDF"
+                          >
+                            <Download size={13} /> Job Card
+                          </button>
+
+                          {b.status !== 'Delivered' && (
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() => handleDeliverAndSettle(b)}
+                              title="Settle balance due and mark as delivered"
+                            >
+                              <CheckCircle2 size={13} /> Settle & Deliver
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Responsive Cards Format (Matching Reference Image) */}
+          <div className="mobile-only-cards">
+            {filteredBookings.length === 0 ? (
+              <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
+                No custom bookings found for this filter.
+              </div>
+            ) : (
+              filteredBookings.map((b) => (
+                <div key={b.id} className="mobile-data-card">
+                  {/* Top Row: Icon + ID Badge (Left) and Status (Right) */}
+                  <div className="mobile-card-top">
+                    <div className="mobile-card-badge-group">
+                      <div className="mobile-card-icon-box">
+                        <CalendarCheck size={18} color="var(--primary)" />
+                      </div>
+                      <span className="badge badge-primary font-mono">{b.bookingNo || b.id}</span>
+                    </div>
+                    <span
+                      className={`badge ${
+                        b.status === 'Delivered'
+                          ? 'badge-success'
+                          : b.status === 'Ready for Trial'
+                          ? 'badge-cyan'
+                          : b.status === 'In Production'
+                          ? 'badge-warning'
+                          : 'badge-primary'
+                      }`}
+                    >
+                      {b.status}
+                    </span>
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <div>
+                    <h3
+                      className="mobile-card-title"
+                      style={{ cursor: 'pointer', color: 'var(--primary)' }}
+                      onClick={() => {
+                        const matched = customers.find((c) => c.id === b.customerId || c.name === b.customerName);
+                        setSelectedCustomerFor360(matched || { id: b.customerId, name: b.customerName, phone: b.customerPhone, type: 'VIP Bespoke' });
+                      }}
+                      title="View Customer Profile"
+                    >
+                      {b.customerName}
+                    </h3>
+                    <div className="mobile-card-subtitle">
+                      {b.garmentType} • {b.fabricDetails}
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="mobile-card-details">
+                    <div>
+                      Phone: <strong style={{ color: 'var(--text-main)' }}>{b.customerPhone}</strong>
+                    </div>
+                    <div>
+                      Trial: <strong style={{ color: '#F59E0B' }}>{formatDate(b.trialDate)}</strong> • Delivery: <strong style={{ color: 'var(--text-main)' }}>{formatDate(b.deliveryDate)}</strong>
+                    </div>
+                    <div>
+                      Master: {b.assignedMaster || 'Lead Tailor'}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2px' }}>
+                      <span>Total: {formatCurrency(b.totalAmount, currency)}</span>
+                      <span style={{ color: '#10B981' }}>Advance: {formatCurrency(b.advancePaid, currency)}</span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '2px' }}>
+                    <button
+                      className="btn btn-secondary btn-sm"
+                      style={{ flex: 1 }}
+                      onClick={() => handleJobCardDownload(b)}
+                    >
+                      <Download size={13} /> Job Card
+                    </button>
+                    {b.status !== 'Delivered' && (
+                      <button
+                        className="btn btn-success btn-sm"
+                        style={{ flex: 1 }}
+                        onClick={() => handleDeliverAndSettle(b)}
+                      >
+                        <CheckCircle2 size={13} /> Settle & Deliver
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Dashed Separator */}
+                  <div className="mobile-card-divider" />
+
+                  {/* Footer Row */}
+                  <div className="mobile-card-footer">
+                    <span className="mobile-card-footer-label">Balance Due:</span>
+                    <strong
+                      className="mobile-card-footer-value"
+                      style={{ color: b.balanceDue > 0 ? '#F43F5E' : '#10B981' }}
+                    >
+                      {formatCurrency(b.balanceDue, currency)}
+                    </strong>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </>
       ) : (
         /* Clients & VIP Directory Grid */
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' }}>

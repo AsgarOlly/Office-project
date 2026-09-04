@@ -118,8 +118,8 @@ export const LedgerView = () => {
         </div>
       </div>
 
-      {/* Ledger Table */}
-      <div className="card table-responsive">
+      {/* Desktop Ledger Table */}
+      <div className="card table-responsive desktop-only-table">
         <table className="data-table">
           <thead>
             <tr>
@@ -188,6 +188,83 @@ export const LedgerView = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Responsive Cards Format (Matching Reference Image) */}
+      <div className="mobile-only-cards">
+        {filteredEntries.length === 0 ? (
+          <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
+            No ledger entries found matching current filter.
+          </div>
+        ) : (
+          filteredEntries.map((entry) => (
+            <div key={entry.id} className="mobile-data-card">
+              {/* Top Row: Icon + Voucher Badge (Left) and Types (Right) */}
+              <div className="mobile-card-top">
+                <div className="mobile-card-badge-group">
+                  <div className="mobile-card-icon-box">
+                    <BookOpen size={18} color="var(--primary)" />
+                  </div>
+                  <span className="badge badge-primary font-mono">{entry.refNo || entry.id}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span
+                    className={`badge ${
+                      entry.type === 'Credit' ? 'badge-success' : 'badge-danger'
+                    }`}
+                  >
+                    {entry.type === 'Credit' ? 'Credit (Cr)' : 'Debit (Dr)'}
+                  </span>
+                  <span
+                    className={`badge ${
+                      entry.partyType === 'Customer'
+                        ? 'badge-primary'
+                        : entry.partyType === 'Supplier'
+                        ? 'badge-warning'
+                        : 'badge-danger'
+                    }`}
+                  >
+                    {entry.partyType}
+                  </span>
+                </div>
+              </div>
+
+              {/* Title & Subtitle */}
+              <div>
+                <h3 className="mobile-card-title">{entry.partyName}</h3>
+                <div className="mobile-card-subtitle">
+                  Date: {formatDate(entry.date)}
+                </div>
+              </div>
+
+              {/* Details */}
+              <div className="mobile-card-details">
+                <div>
+                  Narration: <strong style={{ color: 'var(--text-main)' }}>{entry.description}</strong>
+                </div>
+                <div>
+                  Classification: {entry.partyType} Account Head
+                </div>
+              </div>
+
+              {/* Dashed Separator */}
+              <div className="mobile-card-divider" />
+
+              {/* Footer Row */}
+              <div className="mobile-card-footer">
+                <span className="mobile-card-footer-label">
+                  {entry.type === 'Credit' ? 'Inflow (Credit):' : 'Outflow (Debit):'}
+                </span>
+                <strong
+                  className="mobile-card-footer-value"
+                  style={{ color: entry.type === 'Credit' ? '#34D399' : '#FB7185' }}
+                >
+                  {entry.type === 'Credit' ? '+' : '-'}{formatCurrency(entry.amount, currency)}
+                </strong>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Voucher Modal */}

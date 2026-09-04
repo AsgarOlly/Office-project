@@ -278,12 +278,69 @@
 /* ----------------------------------------------------
    2. Product Stages Kanban View
 ---------------------------------------------------- */
+.stages-filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stages-search-input {
+  position: relative;
+  flex: 0 0 340px;
+}
+
+.stages-category-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stage-cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+}
+
+.stage-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-elevated);
+  color: var(--text-muted);
+  min-width: 18px;
+  transition: all 0.2s;
+}
+
+.stage-cat-pill.active .stage-pill-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
 .stages-kanban-board {
   display: flex;
   gap: 16px;
   overflow-x: auto;
   padding-bottom: 16px;
   min-height: 550px;
+}
+
+.stages-kanban-board.single-stage-view {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.stages-kanban-board.single-stage-view .stage-column.single-column-active {
+  flex: 0 0 520px;
+  max-width: 100%;
 }
 
 .stage-column {
@@ -548,8 +605,45 @@
     padding: 1px 4px;
   }
 
-  /* Stages Kanban Mobile Snap */
+  /* Stages Kanban & Category Navigation Mobile */
+  .stages-filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .stages-search-input {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .stages-category-pills {
+    width: 100%;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .stages-kanban-board {
+    min-height: auto;
+    padding-bottom: 8px;
+  }
+
+  .stages-kanban-board.single-stage-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .stages-kanban-board.single-stage-view .stage-column {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .stages-kanban-board.multi-stage-view {
     display: flex;
     gap: 12px;
     overflow-x: auto;
@@ -558,9 +652,22 @@
     padding-bottom: 12px;
   }
 
-  .stage-column {
+  .stages-kanban-board.multi-stage-view .stage-column {
     flex: 0 0 85vw;
     scroll-snap-align: center;
+  }
+
+  .stage-column-header {
+    padding: 12px 14px;
+  }
+
+  .stage-column-body {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .stage-batch-card {
+    padding: 12px;
   }
 
   /* Measurement Silhouette Mobile */

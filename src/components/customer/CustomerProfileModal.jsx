@@ -775,63 +775,128 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
             TAB 2: PAST SALES BILLS & INVOICES
         ---------------------------------------------------- */}
         {activeProfileTab === 'bills' && (
-          <div className="card table-responsive">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Invoice No</th>
-                  <th>Date</th>
-                  <th>Purchased Items</th>
-                  <th>Payment Method</th>
-                  <th>Total Amount</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {customerSales.length === 0 ? (
+          <div>
+            {/* Desktop Table View */}
+            <div className="card table-responsive desktop-only-table">
+              <table className="data-table">
+                <thead>
                   <tr>
-                    <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
-                      No retail POS bills found for this customer yet.
-                    </td>
+                    <th>Invoice No</th>
+                    <th>Date</th>
+                    <th>Purchased Items</th>
+                    <th>Payment Method</th>
+                    <th>Total Amount</th>
+                    <th>Actions</th>
                   </tr>
-                ) : (
-                  customerSales.map((sale) => (
-                    <tr key={sale.id}>
-                      <td>
-                        <strong className="font-mono" style={{ color: 'var(--primary)' }}>
-                          {sale.invoiceNo || sale.id}
-                        </strong>
+                </thead>
+                <tbody>
+                  {customerSales.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                        No retail POS bills found for this customer yet.
                       </td>
-                      <td>{formatDate(sale.date)}</td>
-                      <td>
-                        <div style={{ fontWeight: 600, fontSize: '0.85rem' }}>
-                          {sale.items?.map((item) => `${item.name} (x${item.quantity})`).join(', ')}
+                    </tr>
+                  ) : (
+                    customerSales.map((sale) => (
+                      <tr key={sale.id}>
+                        <td>
+                          <strong className="font-mono" style={{ color: 'var(--primary)' }}>
+                            {sale.invoiceNo || sale.id}
+                          </strong>
+                        </td>
+                        <td>{formatDate(sale.date)}</td>
+                        <td>
+                          <div style={{ fontWeight: 600, fontSize: '0.85rem' }}>
+                            {sale.items?.map((item) => `${item.name} (x${item.quantity})`).join(', ')}
+                          </div>
+                        </td>
+                        <td>
+                          <span className="badge badge-cyan" style={{ textTransform: 'uppercase' }}>
+                            {sale.paymentMethod || 'Cash'}
+                          </span>
+                        </td>
+                        <td>
+                          <strong className="font-mono" style={{ color: '#10B981', fontSize: '0.95rem' }}>
+                            {formatCurrency(sale.total, currency)}
+                          </strong>
+                        </td>
+                        <td>
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => exportInvoicePDF(sale, currency)}
+                            title="Download GST Invoice PDF"
+                          >
+                            <Download size={13} /> Invoice PDF
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Responsive Cards Format */}
+            <div className="mobile-only-cards">
+              {customerSales.length === 0 ? (
+                <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                  No retail POS bills found for this customer yet.
+                </div>
+              ) : (
+                customerSales.map((sale) => (
+                  <div key={sale.id} className="mobile-data-card">
+                    {/* Top Row: Icon + Invoice No (Left) and Payment Mode + PDF Action (Right) */}
+                    <div className="mobile-card-top">
+                      <div className="mobile-card-badge-group">
+                        <div className="mobile-card-icon-box">
+                          <Receipt size={18} color="var(--primary)" />
                         </div>
-                      </td>
-                      <td>
+                        <span className="badge badge-primary font-mono">{sale.invoiceNo || sale.id}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <span className="badge badge-cyan" style={{ textTransform: 'uppercase' }}>
                           {sale.paymentMethod || 'Cash'}
                         </span>
-                      </td>
-                      <td>
-                        <strong className="font-mono" style={{ color: '#10B981', fontSize: '0.95rem' }}>
-                          {formatCurrency(sale.total, currency)}
-                        </strong>
-                      </td>
-                      <td>
                         <button
                           className="btn btn-secondary btn-sm"
+                          style={{ padding: '4px 8px' }}
                           onClick={() => exportInvoicePDF(sale, currency)}
                           title="Download GST Invoice PDF"
                         >
-                          <Download size={13} /> Invoice PDF
+                          <Download size={13} /> PDF
                         </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                      </div>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <div>
+                      <h3 className="mobile-card-title">Retail POS Invoice</h3>
+                      <div className="mobile-card-subtitle">
+                        Date: {formatDate(sale.date)} • Paid via {sale.paymentMethod || 'Cash'}
+                      </div>
+                    </div>
+
+                    {/* Details: Purchased Items */}
+                    <div className="mobile-card-details">
+                      <div>
+                        Items: <strong style={{ color: 'var(--text-main)' }}>{sale.items?.map((item) => `${item.name} (x${item.quantity})`).join(', ') || 'None'}</strong>
+                      </div>
+                    </div>
+
+                    {/* Dashed Separator */}
+                    <div className="mobile-card-divider" />
+
+                    {/* Footer Row */}
+                    <div className="mobile-card-footer">
+                      <span className="mobile-card-footer-label">Total Amount Paid:</span>
+                      <span className="mobile-card-footer-value" style={{ color: '#10B981' }}>
+                        {formatCurrency(sale.total, currency)}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         )}
 
@@ -839,101 +904,195 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
             TAB 3: BESPOKE CUSTOM ORDERS & BOOKINGS
         ---------------------------------------------------- */}
         {activeProfileTab === 'bookings' && (
-          <div className="card table-responsive">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Booking Ref</th>
-                  <th>Garment & Fabric Specs</th>
-                  <th>Trial Date</th>
-                  <th>Delivery Date</th>
-                  <th>Total Agreed</th>
-                  <th>Advance Paid</th>
-                  <th>Balance Due</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {customerBookings.length === 0 ? (
+          <div>
+            {/* Desktop Table View */}
+            <div className="card table-responsive desktop-only-table">
+              <table className="data-table">
+                <thead>
                   <tr>
-                    <td colSpan="9" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
-                      No custom bespoke tailoring orders recorded for this customer.
-                    </td>
+                    <th>Booking Ref</th>
+                    <th>Garment & Fabric Specs</th>
+                    <th>Trial Date</th>
+                    <th>Delivery Date</th>
+                    <th>Total Agreed</th>
+                    <th>Advance Paid</th>
+                    <th>Balance Due</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ) : (
-                  customerBookings.map((bkg) => (
-                    <tr key={bkg.id}>
-                      <td>
-                        <strong className="font-mono" style={{ color: 'var(--primary)' }}>
-                          {bkg.bookingNo || bkg.id}
-                        </strong>
-                      </td>
-                      <td>
-                        <div style={{ fontWeight: 700 }}>{bkg.garmentType}</div>
-                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{bkg.fabricDetails}</div>
-                      </td>
-                      <td>
-                        <span style={{ color: '#F59E0B', fontWeight: 600 }}>{formatDate(bkg.trialDate)}</span>
-                      </td>
-                      <td>
-                        <strong>{formatDate(bkg.deliveryDate)}</strong>
-                      </td>
-                      <td>
-                        <span className="font-mono">{formatCurrency(bkg.totalAmount, currency)}</span>
-                      </td>
-                      <td>
-                        <span className="font-mono" style={{ color: '#10B981', fontWeight: 700 }}>
-                          {formatCurrency(bkg.advancePaid, currency)}
-                        </span>
-                      </td>
-                      <td>
-                        <span
-                          className="font-mono"
-                          style={{
-                            color: bkg.balanceDue > 0 ? '#F43F5E' : '#10B981',
-                            fontWeight: 700,
-                          }}
-                        >
-                          {formatCurrency(bkg.balanceDue, currency)}
-                        </span>
-                      </td>
-                      <td>
-                        <span
-                          className={`badge ${
-                            bkg.status === 'Delivered'
-                              ? 'badge-success'
-                              : bkg.status === 'Ready for Trial'
-                              ? 'badge-cyan'
-                              : 'badge-primary'
-                          }`}
-                        >
-                          {bkg.status}
-                        </span>
-                      </td>
-                      <td>
-                        {bkg.status !== 'Delivered' && (
-                          <button
-                            className="btn btn-success btn-sm"
-                            onClick={() => {
-                              if (
-                                window.confirm(
-                                  `Collect remaining ${formatCurrency(bkg.balanceDue, currency)} and deliver?`
-                                )
-                              ) {
-                                updateBookingStatus(bkg.id, 'Delivered', bkg.balanceDue);
-                              }
-                            }}
-                          >
-                            <CheckCircle2 size={13} /> Settle & Deliver
-                          </button>
-                        )}
+                </thead>
+                <tbody>
+                  {customerBookings.length === 0 ? (
+                    <tr>
+                      <td colSpan="9" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                        No custom bespoke tailoring orders recorded for this customer.
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : (
+                    customerBookings.map((bkg) => (
+                      <tr key={bkg.id}>
+                        <td>
+                          <strong className="font-mono" style={{ color: 'var(--primary)' }}>
+                            {bkg.bookingNo || bkg.id}
+                          </strong>
+                        </td>
+                        <td>
+                          <div style={{ fontWeight: 700 }}>{bkg.garmentType}</div>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{bkg.fabricDetails}</div>
+                        </td>
+                        <td>
+                          <span style={{ color: '#F59E0B', fontWeight: 600 }}>{formatDate(bkg.trialDate)}</span>
+                        </td>
+                        <td>
+                          <strong>{formatDate(bkg.deliveryDate)}</strong>
+                        </td>
+                        <td>
+                          <span className="font-mono">{formatCurrency(bkg.totalAmount, currency)}</span>
+                        </td>
+                        <td>
+                          <span className="font-mono" style={{ color: '#10B981', fontWeight: 700 }}>
+                            {formatCurrency(bkg.advancePaid, currency)}
+                          </span>
+                        </td>
+                        <td>
+                          <span
+                            className="font-mono"
+                            style={{
+                              color: bkg.balanceDue > 0 ? '#F43F5E' : '#10B981',
+                              fontWeight: 700,
+                            }}
+                          >
+                            {formatCurrency(bkg.balanceDue, currency)}
+                          </span>
+                        </td>
+                        <td>
+                          <span
+                            className={`badge ${
+                              bkg.status === 'Delivered'
+                                ? 'badge-success'
+                                : bkg.status === 'Ready for Trial'
+                                ? 'badge-cyan'
+                                : 'badge-primary'
+                            }`}
+                          >
+                            {bkg.status}
+                          </span>
+                        </td>
+                        <td>
+                          {bkg.status !== 'Delivered' && (
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() => {
+                                if (
+                                  window.confirm(
+                                    `Collect remaining ${formatCurrency(bkg.balanceDue, currency)} and deliver?`
+                                  )
+                                ) {
+                                  updateBookingStatus(bkg.id, 'Delivered', bkg.balanceDue);
+                                }
+                              }}
+                            >
+                              <CheckCircle2 size={13} /> Settle & Deliver
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Responsive Cards Format */}
+            <div className="mobile-only-cards">
+              {customerBookings.length === 0 ? (
+                <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                  No custom bespoke tailoring orders recorded for this customer.
+                </div>
+              ) : (
+                customerBookings.map((bkg) => (
+                  <div key={bkg.id} className="mobile-data-card">
+                    {/* Top Row: Icon + Booking ID (Left) and Status (Right) */}
+                    <div className="mobile-card-top">
+                      <div className="mobile-card-badge-group">
+                        <div className="mobile-card-icon-box">
+                          <CalendarCheck size={18} color="#60A5FA" />
+                        </div>
+                        <span className="badge badge-primary font-mono">{bkg.bookingNo || bkg.id}</span>
+                      </div>
+                      <span
+                        className={`badge ${
+                          bkg.status === 'Delivered'
+                            ? 'badge-success'
+                            : bkg.status === 'Ready for Trial'
+                            ? 'badge-cyan'
+                            : 'badge-primary'
+                        }`}
+                      >
+                        {bkg.status}
+                      </span>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <div>
+                      <h3 className="mobile-card-title">{bkg.garmentType}</h3>
+                      <div className="mobile-card-subtitle">
+                        Trial: {formatDate(bkg.trialDate)} • Delivery: {formatDate(bkg.deliveryDate)}
+                      </div>
+                    </div>
+
+                    {/* Details */}
+                    <div className="mobile-card-details">
+                      <div>
+                        Fabric Specs: <strong style={{ color: 'var(--text-main)' }}>{bkg.fabricDetails || 'Standard'}</strong>
+                      </div>
+                      <div className="mobile-card-details-row">
+                        <span>Total Agreed:</span>
+                        <span className="font-mono" style={{ fontWeight: 600 }}>{formatCurrency(bkg.totalAmount, currency)}</span>
+                      </div>
+                      <div className="mobile-card-details-row">
+                        <span>Advance Paid:</span>
+                        <span className="font-mono" style={{ color: '#10B981', fontWeight: 700 }}>{formatCurrency(bkg.advancePaid, currency)}</span>
+                      </div>
+                    </div>
+
+                    {bkg.status !== 'Delivered' && (
+                      <div style={{ marginTop: '2px' }}>
+                        <button
+                          className="btn btn-success btn-sm"
+                          style={{ width: '100%', justifyContent: 'center' }}
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                `Collect remaining ${formatCurrency(bkg.balanceDue, currency)} and deliver?`
+                              )
+                            ) {
+                              updateBookingStatus(bkg.id, 'Delivered', bkg.balanceDue);
+                            }
+                          }}
+                        >
+                          <CheckCircle2 size={13} /> Settle & Deliver
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Dashed Separator */}
+                    <div className="mobile-card-divider" />
+
+                    {/* Footer Row */}
+                    <div className="mobile-card-footer">
+                      <span className="mobile-card-footer-label">Balance Due:</span>
+                      <span
+                        className="mobile-card-footer-value"
+                        style={{ color: bkg.balanceDue > 0 ? '#F43F5E' : '#10B981' }}
+                      >
+                        {formatCurrency(bkg.balanceDue, currency)}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         )}
 
@@ -941,51 +1100,112 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
             TAB 4: ACCOUNT LEDGER & TRANSACTIONS
         ---------------------------------------------------- */}
         {activeProfileTab === 'ledger' && (
-          <div className="card table-responsive">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Ref No</th>
-                  <th>Transaction Description</th>
-                  <th>Type</th>
-                  <th>Amount</th>
-                  <th>Balance Remaining</th>
-                </tr>
-              </thead>
-              <tbody>
-                {customerLedger.length === 0 ? (
+          <div>
+            {/* Desktop Table View */}
+            <div className="card table-responsive desktop-only-table">
+              <table className="data-table">
+                <thead>
                   <tr>
-                    <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
-                      No direct ledger journal entries found for this customer.
-                    </td>
+                    <th>Date</th>
+                    <th>Ref No</th>
+                    <th>Transaction Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Balance Remaining</th>
                   </tr>
-                ) : (
-                  customerLedger.map((entry) => (
-                    <tr key={entry.id}>
-                      <td>{formatDate(entry.date)}</td>
-                      <td>
-                        <span className="badge badge-primary font-mono">{entry.refNo || entry.id}</span>
-                      </td>
-                      <td>{entry.description}</td>
-                      <td>
-                        <span className={`badge ${entry.type === 'Debit' ? 'badge-danger' : 'badge-success'}`}>
-                          {entry.type}
-                        </span>
-                      </td>
-                      <td>
-                        <strong className="font-mono">{formatCurrency(entry.amount, currency)}</strong>
-                      </td>
-                      <td>
-                        <span className="font-mono" style={{ color: entry.balance > 0 ? '#F43F5E' : '#10B981' }}>
-                          {formatCurrency(entry.balance || 0, currency)}
-                        </span>
+                </thead>
+                <tbody>
+                  {customerLedger.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                        No direct ledger journal entries found for this customer.
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : (
+                    customerLedger.map((entry) => (
+                      <tr key={entry.id}>
+                        <td>{formatDate(entry.date)}</td>
+                        <td>
+                          <span className="badge badge-primary font-mono">{entry.refNo || entry.id}</span>
+                        </td>
+                        <td>{entry.description}</td>
+                        <td>
+                          <span className={`badge ${entry.type === 'Debit' ? 'badge-danger' : 'badge-success'}`}>
+                            {entry.type}
+                          </span>
+                        </td>
+                        <td>
+                          <strong className="font-mono">{formatCurrency(entry.amount, currency)}</strong>
+                        </td>
+                        <td>
+                          <span className="font-mono" style={{ color: entry.balance > 0 ? '#F43F5E' : '#10B981' }}>
+                            {formatCurrency(entry.balance || 0, currency)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Responsive Cards Format */}
+            <div className="mobile-only-cards">
+              {customerLedger.length === 0 ? (
+                <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                  No direct ledger journal entries found for this customer.
+                </div>
+              ) : (
+                customerLedger.map((entry) => (
+                  <div key={entry.id} className="mobile-data-card">
+                    {/* Top Row: Icon + Ref No (Left) and Dr/Cr Type (Right) */}
+                    <div className="mobile-card-top">
+                      <div className="mobile-card-badge-group">
+                        <div className="mobile-card-icon-box">
+                          <BookOpen size={18} color="#A78BFA" />
+                        </div>
+                        <span className="badge badge-primary font-mono">{entry.refNo || entry.id}</span>
+                      </div>
+                      <span className={`badge ${entry.type === 'Debit' ? 'badge-danger' : 'badge-success'}`}>
+                        {entry.type}
+                      </span>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <div>
+                      <h3 className="mobile-card-title">{entry.description || 'Ledger Entry'}</h3>
+                      <div className="mobile-card-subtitle">
+                        Date: {formatDate(entry.date)}
+                      </div>
+                    </div>
+
+                    {/* Details: Amount */}
+                    <div className="mobile-card-details">
+                      <div className="mobile-card-details-row">
+                        <span>Voucher Amount:</span>
+                        <span className="font-mono" style={{ fontWeight: 700, color: 'var(--text-main)' }}>
+                          {formatCurrency(entry.amount, currency)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Dashed Separator */}
+                    <div className="mobile-card-divider" />
+
+                    {/* Footer Row */}
+                    <div className="mobile-card-footer">
+                      <span className="mobile-card-footer-label">Balance Remaining:</span>
+                      <span
+                        className="mobile-card-footer-value"
+                        style={{ color: entry.balance > 0 ? '#F43F5E' : '#10B981' }}
+                      >
+                        {formatCurrency(entry.balance || 0, currency)}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         )}
       </div>
