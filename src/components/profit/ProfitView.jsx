@@ -368,7 +368,8 @@ export const ProfitView = () => {
           </div>
           <span className="badge badge-success">High Margin Analysis</span>
         </div>
-        <div className="table-responsive">
+        {/* Desktop Table View */}
+        <div className="table-responsive desktop-only-table">
           <table className="data-table">
             <thead>
               <tr>
@@ -407,6 +408,55 @@ export const ProfitView = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Responsive Cards Format */}
+        <div className="mobile-only-cards" style={{ marginTop: '12px' }}>
+          {analytics.categoryProfitData.map((cat, idx) => (
+            <div key={idx} className="mobile-data-card">
+              <div className="mobile-card-top">
+                <div className="mobile-card-badge-group">
+                  <div className="mobile-card-icon-box">
+                    <BarChart2 size={18} color="#38BDF8" />
+                  </div>
+                  <span className="badge badge-primary font-mono">{`CAT-${idx + 1}`}</span>
+                </div>
+                <span className="badge badge-success font-mono">{cat.margin} Margin</span>
+              </div>
+
+              <div>
+                <h3 className="mobile-card-title">{cat.category}</h3>
+                <div className="mobile-card-subtitle">
+                  Revenue Generated: {formatCurrency(cat.revenue, currency)}
+                </div>
+              </div>
+
+              <div className="mobile-card-details">
+                <div className="mobile-card-details-row">
+                  <span>Profit Margin %:</span>
+                  <span style={{ fontWeight: 700, color: '#38BDF8' }}>{cat.margin}</span>
+                </div>
+                <div style={{ width: '100%', height: '6px', background: 'var(--bg-surface-elevated)', borderRadius: '9999px', overflow: 'hidden', marginTop: '4px' }}>
+                  <div
+                    style={{
+                      width: cat.margin,
+                      height: '100%',
+                      background: 'linear-gradient(90deg, #6366F1 0%, #10B981 100%)',
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="mobile-card-divider" />
+
+              <div className="mobile-card-footer">
+                <span className="mobile-card-footer-label">Gross Profit Earned:</span>
+                <span className="mobile-card-footer-value" style={{ color: '#10B981' }}>
+                  {formatCurrency(cat.profit, currency)}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -116,58 +116,125 @@ export const PurchaseView = () => {
 
       {/* Main Content Area */}
       {activeTab === 'pos' ? (
-        <div className="table-responsive card">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>PO Number</th>
-                <th>Supplier / Mill</th>
-                <th>Order Date</th>
-                <th>Expected Date</th>
-                <th>Line Items</th>
-                <th>Total Value</th>
-                <th>Payment Status</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPOs.length === 0 ? (
+        <>
+          {/* Desktop Table View */}
+          <div className="table-responsive card desktop-only-table">
+            <table className="data-table">
+              <thead>
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
-                    No purchase orders found. Click "+ Create Purchase Order" to raise an inward order.
-                  </td>
+                  <th>PO Number</th>
+                  <th>Supplier / Mill</th>
+                  <th>Order Date</th>
+                  <th>Expected Date</th>
+                  <th>Line Items</th>
+                  <th>Total Value</th>
+                  <th>Payment Status</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ) : (
-                filteredPOs.map((po) => (
-                  <tr key={po.id}>
-                    <td>
-                      <strong style={{ color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{po.id}</strong>
+              </thead>
+              <tbody>
+                {filteredPOs.length === 0 ? (
+                  <tr>
+                    <td colSpan="9" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
+                      No purchase orders found. Click "+ Create Purchase Order" to raise an inward order.
                     </td>
-                    <td>
-                      <div style={{ fontWeight: 600 }}>{po.vendorName}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>ID: {po.vendorId}</div>
-                    </td>
-                    <td>{formatDate(po.orderDate)}</td>
-                    <td>{formatDate(po.expectedDate)}</td>
-                    <td>
-                      <div style={{ fontSize: '0.8rem' }}>
-                        {po.items?.map((item, idx) => (
-                          <div key={idx} style={{ color: 'var(--text-muted)' }}>
-                            • {item.name} ({item.qty} units)
-                          </div>
-                        ))}
+                  </tr>
+                ) : (
+                  filteredPOs.map((po) => (
+                    <tr key={po.id}>
+                      <td>
+                        <strong style={{ color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{po.id}</strong>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600 }}>{po.vendorName}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>ID: {po.vendorId}</div>
+                      </td>
+                      <td>{formatDate(po.orderDate)}</td>
+                      <td>{formatDate(po.expectedDate)}</td>
+                      <td>
+                        <div style={{ fontSize: '0.8rem' }}>
+                          {po.items?.map((item, idx) => (
+                            <div key={idx} style={{ color: 'var(--text-muted)' }}>
+                              • {item.name} ({item.qty} units)
+                            </div>
+                          ))}
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 800, color: '#34D399', fontFamily: 'var(--font-mono)' }}>
+                          {formatCurrency(po.total, currency)}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
+                          Paid: {formatCurrency(po.paidAmount || 0, currency)}
+                        </div>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge ${
+                            po.paymentStatus === 'Paid'
+                              ? 'badge-success'
+                              : po.paymentStatus === 'Partial Paid'
+                              ? 'badge-warning'
+                              : 'badge-danger'
+                          }`}
+                        >
+                          {po.paymentStatus}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge ${
+                            po.status === 'Completed'
+                              ? 'badge-success'
+                              : po.status === 'Ordered'
+                              ? 'badge-warning'
+                              : 'badge-primary'
+                          }`}
+                        >
+                          {po.status}
+                        </span>
+                      </td>
+                      <td>
+                        {po.status !== 'Completed' ? (
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() => receiveStockFromPO(po.id)}
+                            title="Verify delivery, add to inventory stock & record goods inward"
+                          >
+                            <PackageCheck size={14} /> Receive Goods
+                          </button>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#10B981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <CheckCircle size={14} /> Stock Inwarded
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Responsive Cards Format (Matching Reference Image) */}
+          <div className="mobile-only-cards">
+            {filteredPOs.length === 0 ? (
+              <div className="card" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-dim)' }}>
+                No purchase orders found. Click "+ Create Purchase Order" to raise an inward order.
+              </div>
+            ) : (
+              filteredPOs.map((po) => (
+                <div key={po.id} className="mobile-data-card">
+                  {/* Top Row: Icon + ID Badge (Left) and Statuses (Right) */}
+                  <div className="mobile-card-top">
+                    <div className="mobile-card-badge-group">
+                      <div className="mobile-card-icon-box">
+                        <Truck size={18} color="var(--primary)" />
                       </div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 800, color: '#34D399', fontFamily: 'var(--font-mono)' }}>
-                        {formatCurrency(po.total, currency)}
-                      </div>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
-                        Paid: {formatCurrency(po.paidAmount || 0, currency)}
-                      </div>
-                    </td>
-                    <td>
+                      <span className="badge badge-primary font-mono">{po.id}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span
                         className={`badge ${
                           po.paymentStatus === 'Paid'
@@ -179,8 +246,6 @@ export const PurchaseView = () => {
                       >
                         {po.paymentStatus}
                       </span>
-                    </td>
-                    <td>
                       <span
                         className={`badge ${
                           po.status === 'Completed'
@@ -192,28 +257,57 @@ export const PurchaseView = () => {
                       >
                         {po.status}
                       </span>
-                    </td>
-                    <td>
-                      {po.status !== 'Completed' ? (
-                        <button
-                          className="btn btn-success btn-sm"
-                          onClick={() => receiveStockFromPO(po.id)}
-                          title="Verify delivery, add to inventory stock & record goods inward"
-                        >
-                          <PackageCheck size={14} /> Receive Goods
-                        </button>
-                      ) : (
-                        <span style={{ fontSize: '0.75rem', color: '#10B981', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <CheckCircle size={14} /> Stock Inwarded
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                    </div>
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <div>
+                    <h3 className="mobile-card-title">{po.vendorName}</h3>
+                    <div className="mobile-card-subtitle">
+                      Ordered: {formatDate(po.orderDate)} • Expected: {formatDate(po.expectedDate)}
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="mobile-card-details">
+                    <div>
+                      Supplier ID: <strong style={{ color: 'var(--text-main)' }}>{po.vendorId}</strong>
+                    </div>
+                    <div>
+                      Line Items: {po.items?.map((item) => `${item.name} (${item.qty})`).join(', ') || 'None'}
+                    </div>
+                    <div>
+                      Paid: <strong style={{ color: '#10B981' }}>{formatCurrency(po.paidAmount || 0, currency)}</strong>
+                    </div>
+                  </div>
+
+                  {po.status !== 'Completed' && (
+                    <div style={{ marginTop: '2px' }}>
+                      <button
+                        className="btn btn-success btn-sm"
+                        style={{ width: '100%' }}
+                        onClick={() => receiveStockFromPO(po.id)}
+                      >
+                        <PackageCheck size={14} /> Receive Goods Inward
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Dashed Separator */}
+                  <div className="mobile-card-divider" />
+
+                  {/* Footer Row */}
+                  <div className="mobile-card-footer">
+                    <span className="mobile-card-footer-label">Total Value:</span>
+                    <strong className="mobile-card-footer-value" style={{ color: '#34D399' }}>
+                      {formatCurrency(po.total, currency)}
+                    </strong>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </>
       ) : (
         /* Vendors Directory Grid */
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' }}>

@@ -313,7 +313,8 @@ export const EmployeeView = () => {
               </div>
             </div>
 
-            <div className="table-responsive">
+            {/* Desktop Table View */}
+            <div className="table-responsive desktop-only-table">
               <table className="data-table">
                 <thead>
                   <tr>
@@ -590,6 +591,146 @@ export const EmployeeView = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Mobile Responsive Cards Format */}
+            <div className="mobile-only-cards" style={{ marginTop: '12px' }}>
+              {employees.map((emp) => {
+                const salary = calculateEmployeeSalary(emp);
+                return (
+                  <div key={emp.id} className="mobile-data-card">
+                    {/* Top Row: Avatar & EmpId (Left) + Pay Type & Performance (Right) */}
+                    <div className="mobile-card-top">
+                      <div className="mobile-card-badge-group">
+                        <div className="mobile-card-icon-box" style={{ fontSize: '1.3rem' }}>
+                          {emp.avatar || '👤'}
+                        </div>
+                        <span className="badge badge-primary font-mono">{emp.empId}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span
+                          className="badge"
+                          style={{
+                            fontSize: '0.7rem',
+                            padding: '2px 6px',
+                            background:
+                              emp.payType === 'piece_rate'
+                                ? 'rgba(52, 211, 153, 0.15)'
+                                : emp.payType === 'commission_fixed'
+                                ? 'rgba(96, 165, 250, 0.15)'
+                                : 'rgba(167, 139, 250, 0.15)',
+                            color:
+                              emp.payType === 'piece_rate'
+                                ? '#34D399'
+                                : emp.payType === 'commission_fixed'
+                                ? '#60A5FA'
+                                : '#A78BFA',
+                          }}
+                        >
+                          {emp.payType === 'piece_rate'
+                            ? '🧵 Piece-Rate'
+                            : emp.payType === 'commission_fixed'
+                            ? '💼 Comm'
+                            : '🏢 Fixed'}
+                        </span>
+                        <span className="badge badge-warning" style={{ fontSize: '0.7rem' }}>
+                          ★ {emp.performanceScore || 4.8}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <div>
+                      <h3 className="mobile-card-title">{emp.name}</h3>
+                      <div className="mobile-card-subtitle">
+                        {emp.role} • {payrollMonth}
+                      </div>
+                    </div>
+
+                    {/* Details: Base, Incentive, OT, Deductions */}
+                    <div className="mobile-card-details">
+                      <div className="mobile-card-details-row">
+                        <span>Base Guaranteed:</span>
+                        <span className="font-mono" style={{ fontWeight: 700, color: 'var(--text-main)' }}>
+                          {formatCurrency(emp.baseSalary !== undefined ? emp.baseSalary : 500, currency)}
+                        </span>
+                      </div>
+
+                      {emp.payType === 'piece_rate' && (
+                        <div className="mobile-card-details-row">
+                          <span>Piece Work ({salary.piecesDone} pcs @ ₹{salary.pieceRate}):</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#34D399' }}>
+                            +{formatCurrency(salary.pieceEarnings, currency)}
+                          </span>
+                        </div>
+                      )}
+
+                      {emp.payType === 'commission_fixed' && (
+                        <div className="mobile-card-details-row">
+                          <span>Sales Commission:</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#60A5FA' }}>
+                            +{formatCurrency(salary.pieceEarnings, currency)}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="mobile-card-details-row">
+                        <span>Overtime ({salary.otHours} hrs):</span>
+                        <span className="font-mono" style={{ fontWeight: 700, color: '#F59E0B' }}>
+                          +{formatCurrency(salary.otEarnings, currency)}
+                        </span>
+                      </div>
+
+                      {salary.bonus > 0 && (
+                        <div className="mobile-card-details-row">
+                          <span>Bonuses / Incentives:</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#FBBF24' }}>
+                            +{formatCurrency(salary.bonus, currency)}
+                          </span>
+                        </div>
+                      )}
+
+                      {salary.totalDeductions > 0 && (
+                        <div className="mobile-card-details-row">
+                          <span>Deductions / Advances:</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#F43F5E' }}>
+                            -{formatCurrency(salary.totalDeductions, currency)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Actions */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '4px' }}>
+                      <button
+                        className="btn btn-secondary btn-sm"
+                        style={{ justifyContent: 'center' }}
+                        onClick={() => setSelectedEmpForSalaryEdit(emp)}
+                      >
+                        <Edit3 size={13} color="var(--primary)" /> Edit Salary
+                      </button>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        style={{ justifyContent: 'center' }}
+                        onClick={() => handleDownloadPayslip(emp)}
+                      >
+                        <Download size={13} /> Payslip PDF
+                      </button>
+                    </div>
+
+                    {/* Dashed Separator */}
+                    <div className="mobile-card-divider" />
+
+                    {/* Footer Row */}
+                    <div className="mobile-card-footer">
+                      <span className="mobile-card-footer-label">Net Salary Payable:</span>
+                      <span className="mobile-card-footer-value" style={{ color: '#10B981' }}>
+                        {formatCurrency(salary.netPay, currency)}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
@@ -711,7 +852,8 @@ export const EmployeeView = () => {
             </button>
           </div>
 
-          <div className="table-responsive">
+          {/* Desktop Table View */}
+          <div className="table-responsive desktop-only-table">
             <table className="data-table">
               <thead>
                 <tr>
@@ -937,6 +1079,126 @@ export const EmployeeView = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Responsive Cards Format */}
+          <div className="mobile-only-cards" style={{ marginTop: '12px' }}>
+            {attendance.map((att) => (
+              <div key={att.id} className="mobile-data-card">
+                {/* Top Row: Icon + Date Badge (Left) and Status (Right) */}
+                <div className="mobile-card-top">
+                  <div className="mobile-card-badge-group">
+                    <div className="mobile-card-icon-box">
+                      <Clock size={18} color="#F59E0B" />
+                    </div>
+                    <span className="badge badge-primary font-mono">{formatDate(att.date)}</span>
+                  </div>
+                  <span
+                    className="badge"
+                    style={{
+                      background:
+                        att.status === 'Present'
+                          ? 'rgba(16, 185, 129, 0.15)'
+                          : att.status === 'Absent'
+                          ? 'rgba(244, 63, 94, 0.15)'
+                          : att.status === 'Half Day'
+                          ? 'rgba(245, 158, 11, 0.15)'
+                          : 'rgba(139, 92, 246, 0.15)',
+                      color:
+                        att.status === 'Present'
+                          ? '#34D399'
+                          : att.status === 'Absent'
+                          ? '#FB7185'
+                          : att.status === 'Half Day'
+                          ? '#FBBF24'
+                          : '#A78BFA',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {att.status}
+                  </span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <div>
+                  <h3 className="mobile-card-title">{att.empName}</h3>
+                  <div className="mobile-card-subtitle">
+                    Employee ID: {att.empId}
+                  </div>
+                </div>
+
+                {/* Quick P / A / H / L Selector for Mobile */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg-surface-elevated)', padding: '6px 10px', borderRadius: '8px' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Quick Status:</span>
+                  <div style={{ display: 'inline-flex', gap: '4px' }}>
+                    {['Present', 'Absent', 'Half Day', 'Leave'].map((st) => {
+                      const letter = st === 'Present' ? 'P' : st === 'Absent' ? 'A' : st === 'Half Day' ? 'H' : 'L';
+                      const isSel = att.status === st;
+                      const bg = st === 'Present' ? '#10B981' : st === 'Absent' ? '#F43F5E' : st === 'Half Day' ? '#F59E0B' : '#8B5CF6';
+                      return (
+                        <button
+                          key={st}
+                          type="button"
+                          onClick={() => updateAttendanceRecord(att.id, { status: st })}
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            fontWeight: 800,
+                            fontSize: '0.8rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: isSel ? bg : 'transparent',
+                            color: isSel ? '#FFFFFF' : 'var(--text-muted)',
+                            boxShadow: isSel ? `0 2px 6px ${bg}66` : 'none',
+                          }}
+                        >
+                          {letter}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Details: Clock In, Clock Out, Notes */}
+                <div className="mobile-card-details">
+                  <div className="mobile-card-details-row">
+                    <span>Clock-In:</span>
+                    <span className="font-mono" style={{ fontWeight: 600, color: 'var(--text-main)' }}>
+                      {att.inTime || '09:00 AM'}
+                    </span>
+                  </div>
+                  <div className="mobile-card-details-row">
+                    <span>Clock-Out:</span>
+                    <span className="font-mono" style={{ fontWeight: 600, color: 'var(--text-main)' }}>
+                      {att.outTime || '06:00 PM'}
+                    </span>
+                  </div>
+                  {att.notes && (
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontStyle: 'italic', marginTop: '2px' }}>
+                      Note: {att.notes}
+                    </div>
+                  )}
+                </div>
+
+                {/* Dashed Separator */}
+                <div className="mobile-card-divider" />
+
+                {/* Footer Row */}
+                <div className="mobile-card-footer">
+                  <span className="mobile-card-footer-label">Overtime Logged:</span>
+                  <span
+                    className="mobile-card-footer-value"
+                    style={{ color: att.otHours > 0 ? '#F59E0B' : 'var(--text-muted)' }}
+                  >
+                    {att.otHours || 0} hrs
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
