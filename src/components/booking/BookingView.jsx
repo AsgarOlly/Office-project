@@ -64,14 +64,14 @@ export const BookingView = () => {
   return (
     <div className="view-container">
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Order Booking & Bespoke Tailoring</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             Advance custom order bookings, deposit collection, trial fitting scheduling & client registry
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div className="responsive-header-actions" style={{ display: 'flex', gap: '10px' }}>
           <button className="btn btn-secondary" onClick={() => setIsNewCustomerOpen(true)}>
             <UserPlus size={16} /> + Register New Client
           </button>
@@ -82,7 +82,7 @@ export const BookingView = () => {
       </div>
 
       {/* KPI Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div className="stats-grid">
         <StatCard
           label="Total Advance Collected"
           value={formatCurrency(totalAdvanceCollected, currency)}
@@ -275,7 +275,7 @@ export const BookingView = () => {
         </div>
       ) : (
         /* Clients & VIP Directory Grid */
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' }}>
           {customers
             .filter(
               (c) =>

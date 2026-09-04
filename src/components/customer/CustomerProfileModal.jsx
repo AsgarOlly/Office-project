@@ -355,7 +355,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
           </div>
 
           {/* Quick KPI Stats Right */}
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px', width: '100%', maxWidth: '380px' }}>
             <div style={{ textAlign: 'right', padding: '6px 12px', background: 'var(--bg-main)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
               <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Lifetime Spend</div>
               <strong style={{ fontSize: '1.05rem', color: '#10B981', fontFamily: 'var(--font-mono)' }}>
@@ -382,7 +382,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
         {/* ----------------------------------------------------
             2. Main Navigation Tabs for Customer 360
         ---------------------------------------------------- */}
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color)', paddingBottom: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color)', paddingBottom: '8px', overflowX: 'auto', WebkitOverflowScrolling: 'touch', whiteSpace: 'nowrap' }}>
           <button
             className={`btn ${activeProfileTab === 'sizing' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
             onClick={() => setActiveProfileTab('sizing')}

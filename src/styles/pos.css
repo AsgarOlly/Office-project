@@ -435,3 +435,202 @@
   text-align: center;
   margin-top: 12px;
 }
+
+/* ----------------------------------------------------
+   5. POS Mobile Grid Formats & Responsive Overrides
+---------------------------------------------------- */
+.mobile-ticket-bar {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .pos-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 16px;
+  }
+
+  .mobile-ticket-bar {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-surface-elevated);
+    border-top: 2px solid var(--primary);
+    padding: 12px 16px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    margin-top: 14px;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .pos-catalog-section {
+    padding: 12px 10px;
+  }
+
+  .pos-filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .pos-search-input {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .pos-category-pills {
+    width: 100%;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 2-Column Grid Format on Mobile Responsive */
+  .garment-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding-right: 0;
+  }
+
+  .garment-card {
+    padding: 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  .garment-emoji {
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+
+  .garment-card-title {
+    font-size: 0.85rem;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+
+  .garment-meta {
+    font-size: 0.68rem;
+    margin-bottom: 4px;
+  }
+
+  .garment-variant-selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin: 6px 0;
+  }
+
+  .garment-variant-selects select {
+    padding: 3px 4px !important;
+    font-size: 0.68rem !important;
+  }
+
+  .garment-price-row {
+    padding-top: 6px;
+    margin-top: 6px;
+  }
+
+  .price-text {
+    font-size: 0.95rem;
+  }
+
+  .stock-pill {
+    font-size: 0.62rem;
+    padding: 1px 4px;
+  }
+
+  /* Stages Kanban Mobile Snap */
+  .stages-kanban-board {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+  }
+
+  .stage-column {
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+  }
+
+  /* Measurement Silhouette Mobile */
+  .silhouette-canvas-container {
+    min-height: 360px;
+    padding: 12px;
+  }
+
+  .mannequin-wrapper {
+    width: 170px;
+    height: 310px;
+  }
+
+  .measurement-pin {
+    padding: 2px 6px;
+    font-size: 0.62rem;
+  }
+
+  /* Measurement Specs 2-Column Mobile Grid */
+  .specs-input-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  /* Thermal Receipt in Modal */
+  .thermal-receipt-paper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .garment-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .garment-card {
+    padding: 8px;
+  }
+
+  .garment-emoji {
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
+  }
+
+  .garment-card-title {
+    font-size: 0.8rem;
+  }
+
+  .price-text {
+    font-size: 0.88rem;
+  }
+
+  .garment-price-row .btn-sm {
+    padding: 3px 6px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .garment-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .specs-input-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

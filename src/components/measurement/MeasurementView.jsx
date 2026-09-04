@@ -109,26 +109,26 @@ export const MeasurementView = () => {
   return (
     <div className="view-container">
       {/* Top Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Item Measurement & Tailoring Specs Hub</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             Precision anthropometric measurement cards, visual body silhouette mapping, and Master Tailor Job Cards
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div className="responsive-header-actions" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             onClick={() => setIs360ModalOpen(true)}
             style={{ color: 'var(--primary)', borderColor: 'var(--primary-border)' }}
           >
-            <User size={16} /> Customer 360° Profile Hub
+            <User size={15} /> Client 360° Hub
           </button>
-          <button className="btn btn-secondary" onClick={handleExportJobCard}>
-            <Download size={16} /> Download Tailor Cutting Sheet (PDF)
+          <button className="btn btn-secondary btn-sm" onClick={handleExportJobCard}>
+            <Download size={15} /> Job Card (PDF)
           </button>
-          <button className="btn btn-primary" onClick={handleSave}>
-            <Save size={16} /> Save Measurement Profile
+          <button className="btn btn-primary btn-sm" onClick={handleSave}>
+            <Save size={15} /> Save Profile
           </button>
         </div>
       </div>
@@ -196,7 +196,7 @@ export const MeasurementView = () => {
 
           <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* Customer & Garment Selector */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="form-grid-2">
               <div>
                 <label className="form-label">Client Name</label>
                 <select
@@ -234,7 +234,7 @@ export const MeasurementView = () => {
               <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Upper Body Specifications
               </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginTop: '8px' }}>
+              <div className="specs-input-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginTop: '8px' }}>
                 {[
                   { key: 'collar', label: 'Collar (Neck)' },
                   { key: 'chest', label: 'Chest' },
@@ -276,7 +276,7 @@ export const MeasurementView = () => {
               <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#10B981', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Lower Body Specifications
               </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginTop: '8px' }}>
+              <div className="specs-input-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginTop: '8px' }}>
                 {[
                   { key: 'waist', label: 'Waist' },
                   { key: 'hip', label: 'Hip' },
@@ -313,7 +313,7 @@ export const MeasurementView = () => {
             </div>
 
             {/* Fit Preference & Tailor Notes */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '12px' }}>
+            <div className="form-grid-2">
               <div>
                 <label className="form-label">Client Fit Preference</label>
                 <select

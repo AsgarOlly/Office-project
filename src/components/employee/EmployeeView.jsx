@@ -153,28 +153,28 @@ export const EmployeeView = () => {
   return (
     <div className="view-container">
       {/* Top Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Employee, Attendance & Piece-Rate Payroll</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             Attendance logs, advance loans ledger & performance-based piece-rate salary calculations
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <button className="btn btn-secondary" onClick={() => setIsGuideOpen(true)}>
-            <HelpCircle size={16} color="var(--primary)" /> How Extra Pay Works Guide
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <button className="btn btn-secondary btn-sm" onClick={() => setIsGuideOpen(true)}>
+            <HelpCircle size={15} color="var(--primary)" /> Guide
           </button>
-          <button className="btn btn-secondary" onClick={() => setIsAttendanceOpen(true)}>
-            <Clock size={16} /> Mark Attendance Punch
+          <button className="btn btn-secondary btn-sm" onClick={() => setIsAttendanceOpen(true)}>
+            <Clock size={15} /> Attendance Punch
           </button>
-          <button className="btn btn-primary" onClick={() => setIsNewEmpOpen(true)}>
-            <Plus size={16} /> Add Employee Profile
+          <button className="btn btn-primary btn-sm" onClick={() => setIsNewEmpOpen(true)}>
+            <Plus size={15} /> Add Employee
           </button>
         </div>
       </div>
 
       {/* KPI Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div className="stats-grid">
         <StatCard
           label="Active Staff & Master Tailors"
           value={`${totalEmployees} Members`}
@@ -232,14 +232,14 @@ export const EmployeeView = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Owner Total Payroll Summary Banner */}
           <div
+            className="stats-grid"
             style={{
               background: 'var(--bg-surface)',
               border: '1px solid var(--border)',
               borderRadius: 'var(--radius-lg)',
               padding: '16px 20px',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
               gap: '14px',
+              marginBottom: '0px',
             }}
           >
             <div>

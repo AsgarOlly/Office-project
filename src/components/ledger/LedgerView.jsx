@@ -45,7 +45,7 @@ export const LedgerView = () => {
   return (
     <div className="view-container">
       {/* Top Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>General Account Ledger</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
@@ -58,7 +58,7 @@ export const LedgerView = () => {
       </div>
 
       {/* KPI Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div className="stats-grid">
         <StatCard
           label="Total Debits (Dr)"
           value={formatCurrency(totalDebits, currency)}
@@ -93,7 +93,7 @@ export const LedgerView = () => {
 
       {/* Filter and Search Bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           {['All', 'Customer', 'Supplier', 'Expense'].map((type) => (
             <button
               key={type}
@@ -105,7 +105,7 @@ export const LedgerView = () => {
           ))}
         </div>
 
-        <div style={{ position: 'relative', width: '280px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '320px', minWidth: '200px' }}>
           <Search size={16} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
           <input
             type="text"

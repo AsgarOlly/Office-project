@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import {
   Search,
@@ -42,6 +42,7 @@ export const POSView = () => {
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [completedOrder, setCompletedOrder] = useState(null);
+  const cartRef = useRef(null);
 
   const categories = [
     'All',
@@ -104,7 +105,7 @@ export const POSView = () => {
   return (
     <div className="view-container">
       {/* Top Banner */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Point of Sale & Counter Billing</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
@@ -180,7 +181,7 @@ export const POSView = () => {
                   </div>
 
                   {/* Size & Color Selectors */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', margin: '8px 0' }}>
+                  <div className="garment-variant-selects">
                     <div>
                       <select
                         className="form-select"
@@ -232,10 +233,41 @@ export const POSView = () => {
               );
             })}
           </div>
+
+          {/* Sticky Mobile Ticket Bar for Fast Counter Checkout on Mobile */}
+          {cart.length > 0 && (
+            <div className="mobile-ticket-bar">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ShoppingCart size={18} color="var(--primary)" />
+                <div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Ticket ({cart.reduce((a, b) => a + b.quantity, 0)} Items)</div>
+                  <strong style={{ fontSize: '0.92rem', color: '#10B981' }}>
+                    {formatCurrency(grandTotal, currency)}
+                  </strong>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => cartRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  View Ticket
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-success btn-sm"
+                  onClick={() => setIsCheckoutOpen(true)}
+                >
+                  Pay Now →
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right: Cart & Ticket Summary */}
-        <div className="pos-cart-sidebar">
+        <div ref={cartRef} className="pos-cart-sidebar">
           <div className="cart-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <ShoppingCart size={18} color="var(--primary)" />

@@ -222,7 +222,7 @@ export const CheckoutModal = ({
         {/* Payment Methods Tabs */}
         <div>
           <label className="form-label">Payment Tender Method</label>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+          <div className="payment-methods-grid">
             <button
               type="button"
               className={`btn ${paymentMethod === 'cash' ? 'btn-primary' : 'btn-secondary'}`}
