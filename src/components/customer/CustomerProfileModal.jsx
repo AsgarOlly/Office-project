@@ -292,42 +292,16 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
       title={`Customer 360° Profile • ${customer.name}`}
       maxWidth="1020px"
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div className="profile-modal-content">
         {/* ----------------------------------------------------
             1. Customer Header & Lifetime Summary Card
         ---------------------------------------------------- */}
-        <div
-          style={{
-            background: 'var(--bg-surface-elevated)',
-            border: '1px solid var(--border-color)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '18px 20px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '16px',
-          }}
-        >
+        <div className="profile-header-card">
           {/* User Info Left */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div
-              style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '14px',
-                background: 'linear-gradient(135deg, var(--primary) 0%, #4338CA 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.8rem',
-                boxShadow: '0 4px 14px rgba(99, 102, 241, 0.35)',
-              }}
-            >
-              👤
-            </div>
+          <div className="profile-user-left">
+            <div className="profile-avatar-box">👤</div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>{customer.name}</h2>
                 <span className="badge badge-primary font-mono" style={{ fontSize: '0.68rem' }}>
                   {customer.id}
@@ -336,7 +310,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                   {customer.type}
                 </span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '4px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              <div className="profile-contact-row">
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Phone size={13} color="var(--primary)" /> {customer.phone}
                 </span>
@@ -355,24 +329,27 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
           </div>
 
           {/* Quick KPI Stats Right */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px', width: '100%', maxWidth: '380px' }}>
-            <div style={{ textAlign: 'right', padding: '6px 12px', background: 'var(--bg-main)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Lifetime Spend</div>
-              <strong style={{ fontSize: '1.05rem', color: '#10B981', fontFamily: 'var(--font-mono)' }}>
+          <div className="profile-kpi-grid">
+            <div className="profile-kpi-item">
+              <div className="profile-kpi-label">Lifetime Spend</div>
+              <strong className="profile-kpi-value" style={{ color: '#10B981' }}>
                 {formatCurrency(totalSpent, currency)}
               </strong>
             </div>
 
-            <div style={{ textAlign: 'right', padding: '6px 12px', background: 'var(--bg-main)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Balance Due</div>
-              <strong style={{ fontSize: '1.05rem', color: totalBalanceDue > 0 ? '#F43F5E' : '#10B981', fontFamily: 'var(--font-mono)' }}>
+            <div className="profile-kpi-item">
+              <div className="profile-kpi-label">Balance Due</div>
+              <strong
+                className="profile-kpi-value"
+                style={{ color: totalBalanceDue > 0 ? '#F43F5E' : '#10B981' }}
+              >
                 {formatCurrency(totalBalanceDue, currency)}
               </strong>
             </div>
 
-            <div style={{ textAlign: 'right', padding: '6px 12px', background: 'var(--bg-main)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Loyalty Points</div>
-              <strong style={{ fontSize: '1.05rem', color: '#F59E0B', fontFamily: 'var(--font-mono)' }}>
+            <div className="profile-kpi-item">
+              <div className="profile-kpi-label">Loyalty Points</div>
+              <strong className="profile-kpi-value" style={{ color: '#F59E0B' }}>
                 {customer.loyaltyPoints || 0} pts
               </strong>
             </div>
@@ -382,41 +359,41 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
         {/* ----------------------------------------------------
             2. Main Navigation Tabs for Customer 360
         ---------------------------------------------------- */}
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color)', paddingBottom: '8px', overflowX: 'auto', WebkitOverflowScrolling: 'touch', whiteSpace: 'nowrap' }}>
+        <div className="pos-category-pills profile-nav-tabs">
           <button
-            className={`btn ${activeProfileTab === 'sizing' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+            className={`category-pill ${activeProfileTab === 'sizing' ? 'active' : ''}`}
             onClick={() => setActiveProfileTab('sizing')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <Scissors size={14} />
-            <span>Body Sizing & Tailoring Specs</span>
+            <span>Body Sizing & Specs</span>
           </button>
 
           <button
-            className={`btn ${activeProfileTab === 'bills' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+            className={`category-pill ${activeProfileTab === 'bills' ? 'active' : ''}`}
             onClick={() => setActiveProfileTab('bills')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <Receipt size={14} />
-            <span>Past Sales Bills & Invoices ({customerSales.length})</span>
+            <span>Sales Bills ({customerSales.length})</span>
           </button>
 
           <button
-            className={`btn ${activeProfileTab === 'bookings' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+            className={`category-pill ${activeProfileTab === 'bookings' ? 'active' : ''}`}
             onClick={() => setActiveProfileTab('bookings')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <CalendarCheck size={14} />
-            <span>Bespoke Custom Orders ({customerBookings.length})</span>
+            <span>Custom Orders ({customerBookings.length})</span>
           </button>
 
           <button
-            className={`btn ${activeProfileTab === 'ledger' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+            className={`category-pill ${activeProfileTab === 'ledger' ? 'active' : ''}`}
             onClick={() => setActiveProfileTab('ledger')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <BookOpen size={14} />
-            <span>Account Ledger & Statement</span>
+            <span>Account Ledger ({customerLedger.length})</span>
           </button>
         </div>
 
@@ -426,26 +403,21 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
         {activeProfileTab === 'sizing' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* 1-Click Quick Sizing Presets Bar */}
-            <div
-              style={{
-                background: 'var(--bg-surface-elevated)',
-                padding: '12px 16px',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-color)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '10px',
-              }}
-            >
+            <div className="profile-presets-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Sparkles size={16} color="var(--primary)" />
-                <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Quick Auto-Fill Presets:
+                <span
+                  style={{
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  Quick Presets:
                 </span>
               </div>
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              <div className="profile-presets-list">
                 {Object.keys(SIZE_PRESETS).map((presetKey) => (
                   <button
                     key={presetKey}
@@ -453,7 +425,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                     className="btn btn-secondary btn-sm"
                     onClick={() => handleApplyPreset(presetKey)}
                     title={`Auto-fill standard measurements for ${presetKey}`}
-                    style={{ fontSize: '0.75rem', padding: '4px 10px', fontWeight: 600 }}
+                    style={{ fontSize: '0.74rem', padding: '4px 8px', fontWeight: 600 }}
                   >
                     {presetKey}
                   </button>
@@ -462,7 +434,7 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
             </div>
 
             {/* Garment Template Selector */}
-            <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+            <div className="pos-category-pills profile-garment-pills">
               {[
                 'Bespoke Suit & Shirt',
                 'Formal 2-Piece Blazer',
@@ -484,15 +456,24 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
             </div>
 
             {/* 2-Column Sizing Layout: Inputs Left + Live Interactive Silhouette Right */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '16px' }}>
+            <div className="profile-sizing-layout">
               {/* Sizing Input Groups */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {/* 1. Upper Body */}
                 <div className="card" style={{ padding: '14px' }}>
-                  <h4 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <h4
+                    style={{
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      color: 'var(--primary)',
+                      marginBottom: '10px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
                     1. Upper Body Measurements (Inches)
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                  <div className="profile-specs-grid">
                     {[
                       { key: 'collar', label: 'Collar / Neck' },
                       { key: 'chest', label: 'Chest / Bust' },
@@ -507,39 +488,35 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                       <div
                         key={item.key}
                         onClick={() => setActiveMeasurementField(item.key)}
-                        style={{
-                          background: activeMeasurementField === item.key ? 'var(--primary-light)' : 'var(--bg-surface-elevated)',
-                          border: activeMeasurementField === item.key ? '1px solid var(--primary)' : '1px solid var(--border-color)',
-                          padding: '6px 8px',
-                          borderRadius: 'var(--radius-sm)',
-                          transition: 'all 0.2s',
-                        }}
+                        className={`profile-nudge-card ${
+                          activeMeasurementField === item.key ? 'active' : 'inactive'
+                        }`}
                       >
-                        <label style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block', marginBottom: '2px' }}>
+                        <label
+                          style={{
+                            fontSize: '0.7rem',
+                            color: 'var(--text-muted)',
+                            display: 'block',
+                            marginBottom: '2px',
+                          }}
+                        >
                           {item.label}
                         </label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                           <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); nudgeValue(item.key, -0.5); }}
-                            style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-main)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            className="profile-nudge-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nudgeValue(item.key, -0.5);
+                            }}
                           >
-                            <Minus size={10} />
+                            <Minus size={11} />
                           </button>
                           <input
                             type="number"
                             step="0.1"
-                            className="font-mono"
-                            style={{
-                              width: '100%',
-                              background: 'transparent',
-                              border: 'none',
-                              color: 'var(--text-main)',
-                              fontWeight: 800,
-                              fontSize: '0.9rem',
-                              textAlign: 'center',
-                              outline: 'none',
-                            }}
+                            className="profile-spec-input font-mono"
                             value={sizingData[item.key] || ''}
                             onChange={(e) => {
                               const val = e.target.value;
@@ -548,10 +525,13 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                           />
                           <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); nudgeValue(item.key, 0.5); }}
-                            style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-main)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            className="profile-nudge-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nudgeValue(item.key, 0.5);
+                            }}
                           >
-                            <Plus size={10} />
+                            <Plus size={11} />
                           </button>
                         </div>
                       </div>
@@ -561,10 +541,19 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
 
                 {/* 2. Lower Body */}
                 <div className="card" style={{ padding: '14px' }}>
-                  <h4 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-emerald)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <h4
+                    style={{
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      color: 'var(--accent-emerald)',
+                      marginBottom: '10px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
                     2. Lower Body & Trouser Specs (Inches)
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                  <div className="profile-specs-grid">
                     {[
                       { key: 'trouserWaist', label: 'Trouser Waist' },
                       { key: 'trouserLength', label: 'Outseam Length' },
@@ -575,39 +564,35 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                       <div
                         key={item.key}
                         onClick={() => setActiveMeasurementField(item.key)}
-                        style={{
-                          background: activeMeasurementField === item.key ? 'var(--primary-light)' : 'var(--bg-surface-elevated)',
-                          border: activeMeasurementField === item.key ? '1px solid var(--primary)' : '1px solid var(--border-color)',
-                          padding: '6px 8px',
-                          borderRadius: 'var(--radius-sm)',
-                          transition: 'all 0.2s',
-                        }}
+                        className={`profile-nudge-card ${
+                          activeMeasurementField === item.key ? 'active' : 'inactive'
+                        }`}
                       >
-                        <label style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block', marginBottom: '2px' }}>
+                        <label
+                          style={{
+                            fontSize: '0.7rem',
+                            color: 'var(--text-muted)',
+                            display: 'block',
+                            marginBottom: '2px',
+                          }}
+                        >
                           {item.label}
                         </label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                           <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); nudgeValue(item.key, -0.5); }}
-                            style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-main)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            className="profile-nudge-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nudgeValue(item.key, -0.5);
+                            }}
                           >
-                            <Minus size={10} />
+                            <Minus size={11} />
                           </button>
                           <input
                             type="number"
                             step="0.1"
-                            className="font-mono"
-                            style={{
-                              width: '100%',
-                              background: 'transparent',
-                              border: 'none',
-                              color: 'var(--text-main)',
-                              fontWeight: 800,
-                              fontSize: '0.9rem',
-                              textAlign: 'center',
-                              outline: 'none',
-                            }}
+                            className="profile-spec-input font-mono"
                             value={sizingData[item.key] || ''}
                             onChange={(e) => {
                               const val = e.target.value;
@@ -616,10 +601,13 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                           />
                           <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); nudgeValue(item.key, 0.5); }}
-                            style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-main)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            className="profile-nudge-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nudgeValue(item.key, 0.5);
+                            }}
                           >
-                            <Plus size={10} />
+                            <Plus size={11} />
                           </button>
                         </div>
                       </div>
@@ -629,13 +617,15 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
 
                 {/* 3. Fit Style Preference & Notes */}
                 <div className="card" style={{ padding: '14px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div className="profile-form-grid-2">
                     <div>
                       <label className="form-label">Fit Preference</label>
                       <select
                         className="form-select"
                         value={sizingData.fitPreference}
-                        onChange={(e) => setSizingData({ ...sizingData, fitPreference: e.target.value })}
+                        onChange={(e) =>
+                          setSizingData({ ...sizingData, fitPreference: e.target.value })
+                        }
                       >
                         <option value="Slim Tailored Fit">Slim Tailored Fit (Modern Cut)</option>
                         <option value="Tailored Regular Fit">Tailored Regular Fit (Classic)</option>
@@ -651,7 +641,9 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                         className="form-input"
                         placeholder="e.g. Sloping right shoulder; 0.5 in cuff show"
                         value={sizingData.postureNotes}
-                        onChange={(e) => setSizingData({ ...sizingData, postureNotes: e.target.value })}
+                        onChange={(e) =>
+                          setSizingData({ ...sizingData, postureNotes: e.target.value })
+                        }
                       />
                     </div>
                   </div>
@@ -659,20 +651,16 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
               </div>
 
               {/* Interactive SVG Silhouette Guide Right */}
-              <div
-                style={{
-                  background: 'var(--bg-surface-elevated)',
-                  borderRadius: 'var(--radius-lg)',
-                  border: '1px solid var(--border-color)',
-                  padding: '16px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                }}
-              >
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <div className="silhouette-canvas-container profile-silhouette-box">
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: 'var(--text-muted)',
+                    marginBottom: '8px',
+                    textTransform: 'uppercase',
+                  }}
+                >
                   Silhouette Blueprint
                 </div>
 
@@ -680,16 +668,52 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                 <div style={{ position: 'relative', width: '180px', height: '360px' }}>
                   <svg viewBox="0 0 200 400" width="100%" height="100%" style={{ opacity: 0.85 }}>
                     {/* Head */}
-                    <circle cx="100" cy="35" r="20" fill="none" stroke="var(--primary)" strokeWidth="2" strokeDasharray="3 3" />
+                    <circle
+                      cx="100"
+                      cy="35"
+                      r="20"
+                      fill="none"
+                      stroke="var(--primary)"
+                      strokeWidth="2"
+                      strokeDasharray="3 3"
+                    />
                     {/* Neck */}
-                    <rect x="92" y="55" width="16" height="15" fill="rgba(99, 102, 241, 0.15)" stroke="var(--primary)" strokeWidth="1.5" />
+                    <rect
+                      x="92"
+                      y="55"
+                      width="16"
+                      height="15"
+                      fill="rgba(99, 102, 241, 0.15)"
+                      stroke="var(--primary)"
+                      strokeWidth="1.5"
+                    />
                     {/* Torso */}
-                    <path d="M 60 70 L 140 70 L 130 180 L 70 180 Z" fill="rgba(99, 102, 241, 0.1)" stroke="var(--primary)" strokeWidth="2" />
+                    <path
+                      d="M 60 70 L 140 70 L 130 180 L 70 180 Z"
+                      fill="rgba(99, 102, 241, 0.1)"
+                      stroke="var(--primary)"
+                      strokeWidth="2"
+                    />
                     {/* Arms */}
-                    <path d="M 60 70 L 40 180 L 50 185 L 68 85 Z" fill="rgba(99, 102, 241, 0.08)" stroke="var(--primary)" strokeWidth="1.5" />
-                    <path d="M 140 70 L 160 180 L 150 185 L 132 85 Z" fill="rgba(99, 102, 241, 0.08)" stroke="var(--primary)" strokeWidth="1.5" />
+                    <path
+                      d="M 60 70 L 40 180 L 50 185 L 68 85 Z"
+                      fill="rgba(99, 102, 241, 0.08)"
+                      stroke="var(--primary)"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M 140 70 L 160 180 L 150 185 L 132 85 Z"
+                      fill="rgba(99, 102, 241, 0.08)"
+                      stroke="var(--primary)"
+                      strokeWidth="1.5"
+                    />
                     {/* Legs */}
-                    <path d="M 70 180 L 65 370 L 92 370 L 98 220 L 102 220 L 108 370 L 135 370 L 130 180 Z" fill="rgba(16, 185, 129, 0.08)" stroke="#10B981" strokeWidth="2" />
+                    <path
+                      d="M 70 180 L 65 370 L 92 370 L 98 220 L 102 220 L 108 370 L 135 370 L 130 180 Z"
+                      fill="rgba(16, 185, 129, 0.08)"
+                      stroke="#10B981"
+                      strokeWidth="2"
+                    />
                   </svg>
 
                   {/* Measurement Pins */}
@@ -700,7 +724,8 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                       top: '80px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: activeMeasurementField === 'chest' ? 'var(--accent-gold)' : 'var(--primary)',
+                      background:
+                        activeMeasurementField === 'chest' ? 'var(--accent-gold)' : 'var(--primary)',
                       color: '#000',
                       padding: '2px 6px',
                       borderRadius: '10px',
@@ -720,7 +745,8 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                       top: '120px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: activeMeasurementField === 'waist' ? 'var(--accent-gold)' : 'var(--primary)',
+                      background:
+                        activeMeasurementField === 'waist' ? 'var(--accent-gold)' : 'var(--primary)',
                       color: '#000',
                       padding: '2px 6px',
                       borderRadius: '10px',
@@ -739,7 +765,10 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                       position: 'absolute',
                       top: '240px',
                       right: '10px',
-                      background: activeMeasurementField === 'trouserLength' ? 'var(--accent-gold)' : '#10B981',
+                      background:
+                        activeMeasurementField === 'trouserLength'
+                          ? 'var(--accent-gold)'
+                          : '#10B981',
                       color: '#000',
                       padding: '2px 6px',
                       borderRadius: '10px',
@@ -753,14 +782,21 @@ export const CustomerProfileModal = ({ isOpen, onClose, customer }) => {
                   </div>
                 </div>
 
-                <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textAlign: 'center', marginTop: '10px' }}>
+                <div
+                  style={{
+                    fontSize: '0.72rem',
+                    color: 'var(--text-dim)',
+                    textAlign: 'center',
+                    marginTop: '10px',
+                  }}
+                >
                   Click pins or fields on the left to edit.
                 </div>
               </div>
             </div>
 
             {/* Bottom Actions Bar */}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', paddingTop: '10px', borderTop: '1px solid var(--border-color)' }}>
+            <div className="profile-actions-bar">
               <button type="button" className="btn btn-secondary" onClick={handleExportJobCard}>
                 <Download size={16} /> Export Tailor Job Card (PDF)
               </button>

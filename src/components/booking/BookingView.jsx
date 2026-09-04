@@ -17,6 +17,7 @@ import {
   Phone,
   Mail,
   MapPin,
+  Search,
 } from 'lucide-react';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 import { NewBookingModal } from './NewBookingModal';
@@ -32,15 +33,28 @@ export const BookingView = () => {
   const [isNewCustomerOpen, setIsNewCustomerOpen] = useState(false);
   const [selectedCustomerFor360, setSelectedCustomerFor360] = useState(null);
   const [statusFilter, setStatusFilter] = useState('All');
+  const [bookingSearch, setBookingSearch] = useState('');
   const [customerSearch, setCustomerSearch] = useState('');
 
   const totalAdvanceCollected = orderBookings.reduce((sum, b) => sum + (b.advancePaid || 0), 0);
   const totalBalanceDue = orderBookings.reduce((sum, b) => sum + (b.balanceDue || 0), 0);
   const activeBookings = orderBookings.filter((b) => b.status !== 'Delivered').length;
 
-  const filteredBookings = orderBookings.filter(
-    (b) => statusFilter === 'All' || b.status === statusFilter
-  );
+  const filteredBookings = orderBookings.filter((b) => {
+    const matchesStatus = statusFilter === 'All' || b.status === statusFilter;
+    if (!matchesStatus) return false;
+    if (!bookingSearch.trim()) return true;
+    const q = bookingSearch.toLowerCase();
+    return (
+      (b.bookingNo && b.bookingNo.toLowerCase().includes(q)) ||
+      (b.id && b.id.toLowerCase().includes(q)) ||
+      (b.customerName && b.customerName.toLowerCase().includes(q)) ||
+      (b.customerPhone && b.customerPhone.includes(q)) ||
+      (b.garmentType && b.garmentType.toLowerCase().includes(q)) ||
+      (b.fabricDetails && b.fabricDetails.toLowerCase().includes(q)) ||
+      (b.assignedMaster && b.assignedMaster.toLowerCase().includes(q))
+    );
+  });
 
   const handleJobCardDownload = (booking) => {
     const custMeasurement = measurements.find((m) => m.customerId === booking.customerId);
@@ -114,46 +128,74 @@ export const BookingView = () => {
       </div>
 
       {/* Main Tab Switcher */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            className={`btn ${mainTab === 'bookings' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
-            onClick={() => setMainTab('bookings')}
-          >
-            <CalendarCheck size={14} /> Custom Orders & Bookings ({orderBookings.length})
-          </button>
-          <button
-            className={`btn ${mainTab === 'clients' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
-            onClick={() => setMainTab('clients')}
-          >
-            <Users size={14} /> Clients & VIP Directory ({customers.length})
-          </button>
-        </div>
-
-        {mainTab === 'bookings' ? (
-          <div style={{ display: 'flex', gap: '6px', overflowX: 'auto' }}>
-            {['All', 'Booked', 'In Production', 'Ready for Trial', 'Delivered'].map((status) => (
-              <button
-                key={status}
-                className={`category-pill ${statusFilter === status ? 'active' : ''}`}
-                style={{ padding: '4px 10px', fontSize: '0.75rem' }}
-                onClick={() => setStatusFilter(status)}
-              >
-                {status}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <input
-            type="text"
-            className="form-input"
-            style={{ width: '240px', padding: '5px 10px', fontSize: '0.8rem' }}
-            placeholder="Search clients by name, phone..."
-            value={customerSearch}
-            onChange={(e) => setCustomerSearch(e.target.value)}
-          />
-        )}
+      <div className="booking-tab-switcher" style={{ marginBottom: '14px' }}>
+        <button
+          className={`btn ${mainTab === 'bookings' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+          onClick={() => setMainTab('bookings')}
+        >
+          <CalendarCheck size={14} /> Custom Orders & Bookings ({orderBookings.length})
+        </button>
+        <button
+          className={`btn ${mainTab === 'clients' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+          onClick={() => setMainTab('clients')}
+        >
+          <Users size={14} /> Clients & VIP Directory ({customers.length})
+        </button>
       </div>
+
+      {/* Filters and Categories Bar */}
+      {mainTab === 'bookings' ? (
+        <div className="pos-filters-bar booking-filters-bar">
+          <div className="pos-search-input booking-search-input">
+            <Search size={18} className="pos-search-icon" />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Search booking ref, client, garment, phone..."
+              value={bookingSearch}
+              onChange={(e) => setBookingSearch(e.target.value)}
+            />
+          </div>
+
+          <div className="pos-category-pills booking-category-pills">
+            {['All', 'Booked', 'In Production', 'Ready for Trial', 'Delivered'].map((status) => {
+              const count =
+                status === 'All'
+                  ? orderBookings.length
+                  : orderBookings.filter((b) => b.status === status).length;
+              const isSelected = statusFilter === status;
+              return (
+                <button
+                  key={status}
+                  className={`category-pill booking-cat-pill ${isSelected ? 'active' : ''}`}
+                  onClick={() => setStatusFilter(status)}
+                >
+                  <span>{status === 'All' ? 'All Bookings' : status}</span>
+                  <span
+                    className="stage-pill-count"
+                    style={isSelected ? { background: 'rgba(255,255,255,0.25)', color: '#FFF' } : {}}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div className="pos-filters-bar booking-filters-bar" style={{ marginBottom: '16px' }}>
+          <div className="pos-search-input booking-search-input" style={{ width: '100%', flex: '1 1 100%' }}>
+            <Search size={18} className="pos-search-icon" />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Search clients by name, phone number, client ID..."
+              value={customerSearch}
+              onChange={(e) => setCustomerSearch(e.target.value)}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Main Content Area */}
       {mainTab === 'bookings' ? (
