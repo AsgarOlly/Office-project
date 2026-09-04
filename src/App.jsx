@@ -47,7 +47,7 @@ export function App() {
   // Check Role-Based Access Control permissions
   const isAllowed = !currentUser.permissions || currentUser.permissions.includes(activeTab);
 
-  // Render Active Section
+  // Render Active Section hello i am new.
   const renderActiveView = () => {
     if (!isAllowed) {
       return (
