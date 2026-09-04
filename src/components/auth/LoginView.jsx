@@ -85,15 +85,12 @@ export const LoginView = () => {
 
       {/* Main Login Card */}
       <div
-        className="card"
+        className="card login-card"
         style={{
-          width: '100%',
-          maxWidth: '480px',
           background: 'var(--bg-card)',
           backdropFilter: 'blur(20px)',
           border: '1px solid var(--border-color)',
           borderRadius: 'var(--radius-lg)',
-          padding: '36px 32px',
           boxShadow: 'var(--shadow-lg)',
           animation: 'scaleUp 0.3s ease',
         }}
@@ -203,7 +200,7 @@ export const LoginView = () => {
         </div>
 
         {/* 1-Click Role Logins */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <div className="mobile-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
           <button
             type="button"
             className="btn btn-secondary btn-sm"

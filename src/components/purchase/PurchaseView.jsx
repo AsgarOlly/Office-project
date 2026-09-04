@@ -37,14 +37,14 @@ export const PurchaseView = () => {
   return (
     <div className="view-container">
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Purchase Orders & Sourcing</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             Manage raw fabric rolls, accessories procurement, textile mills, and auto stock replenishment
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div className="responsive-header-actions" style={{ display: 'flex', gap: '10px' }}>
           <button className="btn btn-secondary" onClick={() => setIsVendorOpen(true)}>
             <Building2 size={16} /> Add Supplier
           </button>
@@ -55,7 +55,7 @@ export const PurchaseView = () => {
       </div>
 
       {/* KPI Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div className="stats-grid">
         <StatCard
           label="Total Vendor Payables"
           value={formatCurrency(totalPayables, currency)}
@@ -85,8 +85,8 @@ export const PurchaseView = () => {
       </div>
 
       {/* View Switcher Tabs & Search */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <button
             className={`btn ${activeTab === 'pos' ? 'btn-primary' : 'btn-secondary'} btn-sm`}
             onClick={() => setActiveTab('pos')}
@@ -101,7 +101,7 @@ export const PurchaseView = () => {
           </button>
         </div>
 
-        <div style={{ position: 'relative', width: '280px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '300px', minWidth: '200px' }}>
           <Search size={16} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
           <input
             type="text"
@@ -216,7 +216,7 @@ export const PurchaseView = () => {
         </div>
       ) : (
         /* Vendors Directory Grid */
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' }}>
           {vendors.map((v) => (
             <div key={v.id} className="card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

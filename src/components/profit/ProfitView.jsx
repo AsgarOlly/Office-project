@@ -184,7 +184,7 @@ export const ProfitView = () => {
   return (
     <div className="view-container">
       {/* Header & Controls */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+      <div className="responsive-header-row">
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Profit Section & Financial Analytics</h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
@@ -215,7 +215,7 @@ export const ProfitView = () => {
       </div>
 
       {/* KPI Cards (Dynamic to selected timeframe) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div className="stats-grid">
         <StatCard
           label={`${timeRange.toUpperCase()} Gross Profit`}
           value={formatCurrency(analytics.totalGrossProfit, currency)}
@@ -251,7 +251,7 @@ export const ProfitView = () => {
       </div>
 
       {/* Visual Analytics Charts Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginBottom: '24px' }}>
+      <div className="charts-grid">
         {/* Revenue & Profit Area Trend Chart */}
         <div className="card">
           <div className="card-header">
