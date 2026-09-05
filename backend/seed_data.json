@@ -1,0 +1,1029 @@
+{
+  "INITIAL_ATTENDANCE": [
+    {
+      "id": "ATT-01",
+      "empId": "TC-EMP-01",
+      "empName": "Master Harun Rasheed",
+      "date": "2026-09-02",
+      "inTime": "09:00 AM",
+      "outTime": "07:30 PM",
+      "status": "Present",
+      "otHours": 1.5,
+      "notes": "Overtime for suit trial fitting"
+    },
+    {
+      "id": "ATT-02",
+      "empId": "TC-EMP-02",
+      "empName": "Suresh Kumar Sharma",
+      "date": "2026-09-02",
+      "inTime": "09:15 AM",
+      "outTime": "06:00 PM",
+      "status": "Present",
+      "otHours": 0,
+      "notes": "On schedule"
+    },
+    {
+      "id": "ATT-03",
+      "empId": "TC-EMP-03",
+      "empName": "David Miller",
+      "date": "2026-09-02",
+      "inTime": "09:45 AM",
+      "outTime": "08:00 PM",
+      "status": "Present",
+      "otHours": 1,
+      "notes": "Showroom evening peak"
+    },
+    {
+      "id": "ATT-04",
+      "empId": "TC-EMP-04",
+      "empName": "Fatima Zahra",
+      "date": "2026-09-02",
+      "inTime": "09:00 AM",
+      "outTime": "06:00 PM",
+      "status": "Present",
+      "otHours": 0,
+      "notes": "QC inspection batch 40"
+    },
+    {
+      "id": "ATT-05",
+      "empId": "TC-EMP-01",
+      "empName": "Master Harun Rasheed",
+      "date": "2026-09-01",
+      "inTime": "09:05 AM",
+      "outTime": "08:00 PM",
+      "status": "Present",
+      "otHours": 2,
+      "notes": "Sherwani assembly"
+    },
+    {
+      "id": "ATT-06",
+      "empId": "TC-EMP-02",
+      "empName": "Suresh Kumar Sharma",
+      "date": "2026-09-01",
+      "inTime": "09:00 AM",
+      "outTime": "06:00 PM",
+      "status": "Present",
+      "otHours": 0,
+      "notes": "Full day"
+    },
+    {
+      "id": "ATT-07",
+      "empId": "TC-EMP-03",
+      "empName": "David Miller",
+      "date": "2026-09-01",
+      "inTime": "10:00 AM",
+      "outTime": "08:00 PM",
+      "status": "Present",
+      "otHours": 1,
+      "notes": "Evening shift"
+    },
+    {
+      "id": "ATT-08",
+      "empId": "TC-EMP-04",
+      "empName": "Fatima Zahra",
+      "date": "2026-09-01",
+      "inTime": "09:00 AM",
+      "outTime": "06:00 PM",
+      "status": "Present",
+      "otHours": 0,
+      "notes": "Finishing shirts"
+    }
+  ],
+  "INITIAL_CUSTOMERS": [
+    {
+      "id": "CUST-01",
+      "name": "Alexander Wright",
+      "phone": "+1 (555) 342-9810",
+      "email": "alex.wright@email.com",
+      "city": "Downtown West",
+      "type": "VIP Bespoke",
+      "loyaltyPoints": 340,
+      "balanceReceivable": 120,
+      "totalSpent": 1840
+    },
+    {
+      "id": "CUST-02",
+      "name": "Devendra Singhania",
+      "phone": "+91 98201 54321",
+      "email": "devendra.s@outlook.com",
+      "city": "South Avenue",
+      "type": "Regular Retail",
+      "loyaltyPoints": 120,
+      "balanceReceivable": 0,
+      "totalSpent": 620
+    },
+    {
+      "id": "CUST-03",
+      "name": "Marcus Vance",
+      "phone": "+1 (555) 789-2234",
+      "email": "m.vance@techfirm.io",
+      "city": "Uptown Business Bay",
+      "type": "Bespoke Client",
+      "loyaltyPoints": 510,
+      "balanceReceivable": 450,
+      "totalSpent": 2950
+    }
+  ],
+  "INITIAL_EMPLOYEES": [
+    {
+      "id": "EMP-01",
+      "empId": "TC-EMP-01",
+      "name": "Master Harun Rasheed",
+      "role": "Master Tailor (Suit Specialist)",
+      "department": "Production & Bespoke",
+      "phone": "+1 (555) 890-1122",
+      "joinDate": "2022-04-15",
+      "payType": "piece_rate",
+      "baseSalary": 600,
+      "pieceRatePerItem": {
+        "3-Piece Suit": 55,
+        "2-Piece Suit": 42,
+        "Blazer / Jacket": 30,
+        "Formal Shirt": 12,
+        "Trouser": 10
+      },
+      "advanceLoanTotal": 500,
+      "advanceLoanDeductionPerMonth": 100,
+      "advanceLoanRemaining": 300,
+      "performanceScore": 4.9,
+      "piecesCompletedThisMonth": 18,
+      "overtimeRatePerHour": 8,
+      "avatar": "👨‍🦳",
+      "status": "Active"
+    },
+    {
+      "id": "EMP-02",
+      "empId": "TC-EMP-02",
+      "name": "Suresh Kumar Sharma",
+      "role": "Senior Pattern Maker & Cutter",
+      "department": "Cutting & Sizing",
+      "phone": "+1 (555) 890-3344",
+      "joinDate": "2023-01-10",
+      "payType": "piece_rate",
+      "baseSalary": 550,
+      "pieceRatePerItem": {
+        "Suit Pattern & Cut": 15,
+        "Sherwani Cut": 18,
+        "Shirt Cutting (Lot 10)": 20,
+        "Trouser Cutting": 6
+      },
+      "advanceLoanTotal": 250,
+      "advanceLoanDeductionPerMonth": 50,
+      "advanceLoanRemaining": 100,
+      "performanceScore": 4.8,
+      "piecesCompletedThisMonth": 34,
+      "overtimeRatePerHour": 7.5,
+      "avatar": "👨‍🦰",
+      "status": "Active"
+    },
+    {
+      "id": "EMP-03",
+      "empId": "TC-EMP-03",
+      "name": "David Miller",
+      "role": "Head Sales Executive & POS Cashier",
+      "department": "Showroom Sales",
+      "phone": "+1 (555) 890-5566",
+      "joinDate": "2023-08-01",
+      "payType": "commission_fixed",
+      "baseSalary": 750,
+      "salesCommissionRate": 2.5,
+      "advanceLoanTotal": 0,
+      "advanceLoanDeductionPerMonth": 0,
+      "advanceLoanRemaining": 0,
+      "performanceScore": 4.7,
+      "salesAchievedThisMonth": 8420,
+      "overtimeRatePerHour": 6,
+      "avatar": "👨‍💼",
+      "status": "Active"
+    },
+    {
+      "id": "EMP-04",
+      "empId": "TC-EMP-04",
+      "name": "Fatima Zahra",
+      "role": "Quality Control Lead & Finisher",
+      "department": "Quality & Finishing",
+      "phone": "+1 (555) 890-7788",
+      "joinDate": "2024-02-15",
+      "payType": "fixed",
+      "baseSalary": 680,
+      "advanceLoanTotal": 150,
+      "advanceLoanDeductionPerMonth": 50,
+      "advanceLoanRemaining": 50,
+      "performanceScore": 4.95,
+      "piecesCompletedThisMonth": 120,
+      "overtimeRatePerHour": 7,
+      "avatar": "👩‍🦱",
+      "status": "Active"
+    }
+  ],
+  "INITIAL_LEDGER_ENTRIES": [
+    {
+      "id": "LED-001",
+      "date": "2026-08-28",
+      "partyType": "Supplier",
+      "partyName": "Vardhman Textile Mills Ltd.",
+      "type": "Credit",
+      "description": "Purchase Order Bill #PO-2026-001 Material Inward",
+      "amount": 1905.75,
+      "balance": 1905.75,
+      "refNo": "PO-2026-001"
+    },
+    {
+      "id": "LED-002",
+      "date": "2026-08-29",
+      "partyType": "Supplier",
+      "partyName": "Vardhman Textile Mills Ltd.",
+      "type": "Debit",
+      "description": "Bank Transfer NEFT / Vendor Payout",
+      "amount": 1000,
+      "balance": 905.75,
+      "refNo": "TXN-BNK-9901"
+    },
+    {
+      "id": "LED-003",
+      "date": "2026-09-01",
+      "partyType": "Customer",
+      "partyName": "Alexander Wright",
+      "type": "Debit",
+      "description": "Invoice #TC-INV-8801 Retail Garments Purchase",
+      "amount": 143.8,
+      "balance": 143.8,
+      "refNo": "INV-2026-8801"
+    },
+    {
+      "id": "LED-004",
+      "date": "2026-09-01",
+      "partyType": "Customer",
+      "partyName": "Alexander Wright",
+      "type": "Credit",
+      "description": "Credit Card Settlement POS POS-8801",
+      "amount": 143.8,
+      "balance": 0,
+      "refNo": "PAY-CRD-8801"
+    },
+    {
+      "id": "LED-005",
+      "date": "2026-09-01",
+      "partyType": "Expense",
+      "partyName": "Store Electricity & Maintenance",
+      "type": "Debit",
+      "description": "Monthly utility and ironing boiler electricity charges",
+      "amount": 210,
+      "balance": 210,
+      "refNo": "EXP-UTIL-09"
+    }
+  ],
+  "INITIAL_MEASUREMENTS": [
+    {
+      "id": "MSR-01",
+      "customerId": "CUST-01",
+      "customerName": "Alexander Wright",
+      "garmentType": "Bespoke Suit & Shirt",
+      "updatedDate": "2026-08-28",
+      "measurements": {
+        "collar": "16.5",
+        "chest": "41.0",
+        "waist": "34.5",
+        "hip": "40.0",
+        "shoulder": "18.5",
+        "sleeveLength": "25.0",
+        "bicep": "14.5",
+        "wristCuff": "7.5",
+        "shirtLength": "30.0",
+        "trouserWaist": "34.0",
+        "trouserLength": "41.5",
+        "inseam": "32.0",
+        "thigh": "23.0",
+        "bottomHem": "14.5"
+      },
+      "fitPreference": "Slim Tailored Fit",
+      "postureNotes": "Slightly sloping right shoulder; prefers 0.5\" shirt cuff show beyond jacket sleeve."
+    },
+    {
+      "id": "MSR-02",
+      "customerId": "CUST-03",
+      "customerName": "Marcus Vance",
+      "garmentType": "Sherwani & Tuxedo",
+      "updatedDate": "2026-08-29",
+      "measurements": {
+        "collar": "17.0",
+        "chest": "44.0",
+        "waist": "38.0",
+        "hip": "44.5",
+        "shoulder": "19.5",
+        "sleeveLength": "26.0",
+        "bicep": "16.0",
+        "wristCuff": "8.0",
+        "shirtLength": "31.5",
+        "trouserWaist": "38.0",
+        "trouserLength": "42.5",
+        "inseam": "33.0",
+        "thigh": "25.0",
+        "bottomHem": "15.0"
+      },
+      "fitPreference": "Comfort Regular Fit",
+      "postureNotes": "Erect posture, standard armhole depth, padded chest canvas requested."
+    }
+  ],
+  "INITIAL_ORDER_BOOKINGS": [
+    {
+      "id": "BKG-2026-101",
+      "bookingNo": "BK-101",
+      "customerId": "CUST-01",
+      "customerName": "Alexander Wright",
+      "customerPhone": "+1 (555) 342-9810",
+      "garmentType": "Men Italian Bespoke 3-Piece Suit",
+      "fabricDetails": "Italian Merino Wool 140s (Midnight Blue)",
+      "bookingDate": "2026-08-28",
+      "trialDate": "2026-09-04",
+      "deliveryDate": "2026-09-08",
+      "totalAmount": 380,
+      "advancePaid": 200,
+      "balanceDue": 180,
+      "status": "In Production",
+      "assignedMaster": "Master Harun (Master Tailor)",
+      "specialInstructions": "Peak lapel, hand-stitched Milanese buttonhole on lapel, purple silk inner lining.",
+      "measurementId": "MSR-01"
+    },
+    {
+      "id": "BKG-2026-102",
+      "bookingNo": "BK-102",
+      "customerId": "CUST-03",
+      "customerName": "Marcus Vance",
+      "customerPhone": "+1 (555) 789-2234",
+      "garmentType": "Hand Embroidered Silk Sherwani",
+      "fabricDetails": "Raw Mulberry Silk with Zari Border",
+      "bookingDate": "2026-08-29",
+      "trialDate": "2026-09-06",
+      "deliveryDate": "2026-09-11",
+      "totalAmount": 450,
+      "advancePaid": 250,
+      "balanceDue": 200,
+      "status": "In Production",
+      "assignedMaster": "Master Suresh (Cutter & Master)",
+      "specialInstructions": "Matching stole with gold fringe, antique metal buttons.",
+      "measurementId": "MSR-02"
+    },
+    {
+      "id": "BKG-2026-103",
+      "bookingNo": "BK-103",
+      "customerId": "CUST-02",
+      "customerName": "Devendra Singhania",
+      "customerPhone": "+91 98201 54321",
+      "garmentType": "Pair of Formal Linen Trousers",
+      "fabricDetails": "French Normandy Pure Linen (Sand Beige)",
+      "bookingDate": "2026-09-01",
+      "trialDate": "2026-09-05",
+      "deliveryDate": "2026-09-07",
+      "totalAmount": 98,
+      "advancePaid": 98,
+      "balanceDue": 0,
+      "status": "Ready for Trial",
+      "assignedMaster": "Tailor Farooq",
+      "specialInstructions": "Side adjusters instead of belt loops, 1.75 inch turn-up cuff."
+    }
+  ],
+  "INITIAL_PRODUCTS": [
+    {
+      "id": "PRD-101",
+      "sku": "SH-EGY-01",
+      "barcode": "890100101001",
+      "name": "Egyptian Giza Cotton Formal Shirt",
+      "category": "Formal Shirts",
+      "brand": "ThreadCraft Luxe",
+      "fabric": "100% Giza Cotton",
+      "costPrice": 22,
+      "price": 58,
+      "mrp": 65,
+      "stock": 45,
+      "minStock": 10,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Crisp White",
+        "Sky Blue",
+        "Pastel Pink",
+        "Navy"
+      ],
+      "fit": "Slim Fit",
+      "taxRate": 12,
+      "hsn": "6205",
+      "image": "👔"
+    },
+    {
+      "id": "PRD-102",
+      "sku": "SUIT-ITA-02",
+      "barcode": "890100101002",
+      "name": "Italian Merino Wool 3-Piece Bespoke Suit",
+      "category": "Suits & Blazers",
+      "brand": "Sartorial Signature",
+      "fabric": "Super 140s Merino Wool",
+      "costPrice": 120,
+      "price": 340,
+      "mrp": 380,
+      "stock": 14,
+      "minStock": 4,
+      "sizes": [
+        "38R",
+        "40R",
+        "42R",
+        "44R",
+        "Custom"
+      ],
+      "colors": [
+        "Midnight Blue",
+        "Charcoal Grey",
+        "Jet Black"
+      ],
+      "fit": "Tailored Fit",
+      "taxRate": 12,
+      "hsn": "6203",
+      "image": "🧥"
+    },
+    {
+      "id": "PRD-103",
+      "sku": "TR-LIN-03",
+      "barcode": "890100101003",
+      "name": "French Pure Linen Casual Trouser",
+      "category": "Trousers & Chinos",
+      "brand": "Riviera Breeze",
+      "fabric": "100% Normandy Linen",
+      "costPrice": 18.5,
+      "price": 49,
+      "mrp": 55,
+      "stock": 32,
+      "minStock": 8,
+      "sizes": [
+        "30",
+        "32",
+        "34",
+        "36",
+        "38"
+      ],
+      "colors": [
+        "Sand Beige",
+        "Olive Green",
+        "Classic Navy",
+        "Stone"
+      ],
+      "fit": "Relaxed Tapered",
+      "taxRate": 12,
+      "hsn": "6204",
+      "image": "👖"
+    },
+    {
+      "id": "PRD-104",
+      "sku": "DNM-SLV-04",
+      "barcode": "890100101004",
+      "name": "Japanese Selvedge Denim Jeans (14oz)",
+      "category": "Denims",
+      "brand": "Kuroki Heritage",
+      "fabric": "Raw Selvedge Cotton",
+      "costPrice": 28,
+      "price": 79,
+      "mrp": 89,
+      "stock": 26,
+      "minStock": 6,
+      "sizes": [
+        "30",
+        "32",
+        "34",
+        "36"
+      ],
+      "colors": [
+        "Deep Indigo",
+        "Washed Stone",
+        "Obsidian Black"
+      ],
+      "fit": "Regular Straight",
+      "taxRate": 12,
+      "hsn": "6203",
+      "image": "👖"
+    },
+    {
+      "id": "PRD-105",
+      "sku": "ETH-SILK-05",
+      "barcode": "890100101005",
+      "name": "Banarasi Raw Silk Embroidered Kurta Set",
+      "category": "Ethnic & Festive",
+      "brand": "Virasat Couture",
+      "fabric": "Raw Mulberry Silk",
+      "costPrice": 42,
+      "price": 125,
+      "mrp": 140,
+      "stock": 18,
+      "minStock": 5,
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Maroon Gold",
+        "Royal Emerald",
+        "Mustard Yellow"
+      ],
+      "fit": "Traditional Regular",
+      "taxRate": 12,
+      "hsn": "6211",
+      "image": "🥻"
+    },
+    {
+      "id": "PRD-106",
+      "sku": "FAB-COT-101",
+      "barcode": "890100101006",
+      "name": "Premium Oxford Cotton Fabric (Per Meter)",
+      "category": "Raw Fabrics",
+      "brand": "Vardhman Mills",
+      "fabric": "100% Combed Cotton",
+      "costPrice": 4.2,
+      "price": 9.5,
+      "mrp": 12,
+      "stock": 350,
+      "unit": "Meter",
+      "minStock": 50,
+      "sizes": [
+        "Standard Width 58\""
+      ],
+      "colors": [
+        "Sky Blue",
+        "White",
+        "Lilac",
+        "Stripe Navy"
+      ],
+      "fit": "Unstitched Roll",
+      "taxRate": 5,
+      "hsn": "5208",
+      "image": "🧵"
+    },
+    {
+      "id": "PRD-107",
+      "sku": "ACC-TIE-07",
+      "barcode": "890100101007",
+      "name": "Handcrafted Jacquard Silk Necktie & Pocket Square",
+      "category": "Accessories",
+      "brand": "ThreadCraft Luxe",
+      "fabric": "100% Micro Silk",
+      "costPrice": 6.5,
+      "price": 24,
+      "mrp": 29,
+      "stock": 50,
+      "minStock": 12,
+      "sizes": [
+        "Free Size"
+      ],
+      "colors": [
+        "Burgundy Paisley",
+        "Navy Polka",
+        "Champagne Gold"
+      ],
+      "fit": "Standard 3.25\"",
+      "taxRate": 12,
+      "hsn": "6215",
+      "image": "👔"
+    }
+  ],
+  "INITIAL_PRODUCT_STAGES": [
+    {
+      "id": "STG-BATCH-501",
+      "batchNo": "LOT-2026-501",
+      "garmentType": "Men Italian Bespoke 3-Piece Suit",
+      "clientName": "Alexander Wright",
+      "quantity": 1,
+      "currentStage": "Stitching & Tailoring",
+      "assignedTo": "Master Harun (Master Tailor)",
+      "startDate": "2026-08-28",
+      "targetDate": "2026-09-06",
+      "progress": 55,
+      "fabricCode": "FAB-WOOL-ITA",
+      "qcStatus": "In Progress",
+      "notes": "Peak lapel, hand-canvassed chest piece, pick stitching on edges.",
+      "history": [
+        {
+          "stage": "Fabric Sourcing & Inward",
+          "date": "2026-08-28",
+          "status": "Completed",
+          "by": "Warehouse"
+        },
+        {
+          "stage": "Pattern Making & Cutting",
+          "date": "2026-08-30",
+          "status": "Completed",
+          "by": "Master Suresh (Cutter)"
+        },
+        {
+          "stage": "Stitching & Tailoring",
+          "date": "2026-09-01",
+          "status": "Active",
+          "by": "Master Harun"
+        }
+      ]
+    },
+    {
+      "id": "STG-BATCH-502",
+      "batchNo": "LOT-2026-502",
+      "garmentType": "Hand Embroidered Silk Sherwani",
+      "clientName": "Marcus Vance",
+      "quantity": 1,
+      "currentStage": "Embroidery & Detailing",
+      "assignedTo": "Zari Crafts Unit 2",
+      "startDate": "2026-08-29",
+      "targetDate": "2026-09-08",
+      "progress": 68,
+      "fabricCode": "FAB-SILK-RAW",
+      "qcStatus": "In Progress",
+      "notes": "Zardozi work on mandarin collar and cuffs with antique gold thread.",
+      "history": [
+        {
+          "stage": "Fabric Sourcing & Inward",
+          "date": "2026-08-29",
+          "status": "Completed",
+          "by": "Warehouse"
+        },
+        {
+          "stage": "Pattern Making & Cutting",
+          "date": "2026-08-31",
+          "status": "Completed",
+          "by": "Master Suresh"
+        },
+        {
+          "stage": "Stitching & Tailoring",
+          "date": "2026-09-01",
+          "status": "Completed",
+          "by": "Tailor Farooq"
+        },
+        {
+          "stage": "Embroidery & Detailing",
+          "date": "2026-09-02",
+          "status": "Active",
+          "by": "Zari Unit"
+        }
+      ]
+    },
+    {
+      "id": "STG-BATCH-503",
+      "batchNo": "LOT-2026-503",
+      "garmentType": "Formal Oxford Shirts (Retail Batch)",
+      "clientName": "Showroom Stock Batch #40",
+      "quantity": 50,
+      "currentStage": "Quality Check (QC Inspection)",
+      "assignedTo": "Fatima Zahra (QC Lead)",
+      "startDate": "2026-08-24",
+      "targetDate": "2026-09-03",
+      "progress": 90,
+      "fabricCode": "FAB-COT-101",
+      "qcStatus": "QC Passed 48/50 (2 minor button rework)",
+      "notes": "Lot inspection passed. Ready for steam press and tagging.",
+      "history": [
+        {
+          "stage": "Fabric Sourcing & Inward",
+          "date": "2026-08-24",
+          "status": "Completed",
+          "by": "Warehouse"
+        },
+        {
+          "stage": "Pattern Making & Cutting",
+          "date": "2026-08-25",
+          "status": "Completed",
+          "by": "Auto Cutter"
+        },
+        {
+          "stage": "Stitching & Tailoring",
+          "date": "2026-08-28",
+          "status": "Completed",
+          "by": "Assembly Line A"
+        },
+        {
+          "stage": "Washing & Finishing",
+          "date": "2026-08-31",
+          "status": "Completed",
+          "by": "Finishing Unit"
+        },
+        {
+          "stage": "Quality Check (QC Inspection)",
+          "date": "2026-09-02",
+          "status": "Active",
+          "by": "Fatima QC"
+        }
+      ]
+    }
+  ],
+  "INITIAL_PURCHASE_ORDERS": [
+    {
+      "id": "PO-2026-001",
+      "vendorId": "VEN-01",
+      "vendorName": "Vardhman Textile Mills Ltd.",
+      "orderDate": "2026-08-25",
+      "expectedDate": "2026-09-05",
+      "status": "Completed",
+      "paymentStatus": "Partial Paid",
+      "items": [
+        {
+          "name": "Premium Oxford Cotton Fabric (Per Meter)",
+          "qty": 200,
+          "unitPrice": 4.2,
+          "total": 840
+        },
+        {
+          "name": "Egyptian Giza Shirting Rolls (Meters)",
+          "qty": 150,
+          "unitPrice": 6.5,
+          "total": 975
+        }
+      ],
+      "subtotal": 1815,
+      "tax": 90.75,
+      "total": 1905.75,
+      "paidAmount": 1000,
+      "notes": "Received batch in good condition. Shipped to main warehouse cutting department."
+    },
+    {
+      "id": "PO-2026-002",
+      "vendorId": "VEN-02",
+      "vendorName": "Biella Woolen Imports Inc.",
+      "orderDate": "2026-08-30",
+      "expectedDate": "2026-09-10",
+      "status": "Ordered",
+      "paymentStatus": "Pending",
+      "items": [
+        {
+          "name": "Italian Super 140s Merino Wool (Midnight Blue)",
+          "qty": 50,
+          "unitPrice": 45,
+          "total": 2250
+        },
+        {
+          "name": "Bespoke Canvas Lining & Shoulder Pads",
+          "qty": 100,
+          "unitPrice": 3.5,
+          "total": 350
+        }
+      ],
+      "subtotal": 2600,
+      "tax": 312,
+      "total": 2912,
+      "paidAmount": 0,
+      "notes": "Urgent for Autumn wedding bespoke orders."
+    }
+  ],
+  "INITIAL_SALES_ORDERS": [
+    {
+      "id": "INV-2026-8801",
+      "invoiceNo": "TC-INV-8801",
+      "date": "2026-09-01 11:30 AM",
+      "customerName": "Alexander Wright",
+      "customerPhone": "+1 (555) 342-9810",
+      "items": [
+        {
+          "id": "PRD-101",
+          "name": "Egyptian Giza Cotton Formal Shirt",
+          "price": 58,
+          "costPrice": 22,
+          "quantity": 2,
+          "size": "L",
+          "color": "Sky Blue",
+          "discount": 5
+        },
+        {
+          "id": "PRD-107",
+          "name": "Handcrafted Jacquard Silk Necktie",
+          "price": 24,
+          "costPrice": 6.5,
+          "quantity": 1,
+          "size": "Free Size",
+          "color": "Navy Polka",
+          "discount": 0
+        }
+      ],
+      "subtotal": 134.2,
+      "discountTotal": 5.8,
+      "tax": 15.4,
+      "total": 143.8,
+      "paymentMethod": "card",
+      "paymentStatus": "Paid",
+      "cashier": "David Miller (Sales Executive)",
+      "profit": 89.3
+    },
+    {
+      "id": "INV-2026-8802",
+      "invoiceNo": "TC-INV-8802",
+      "date": "2026-09-01 03:15 PM",
+      "customerName": "Devendra Singhania",
+      "customerPhone": "+91 98201 54321",
+      "items": [
+        {
+          "id": "PRD-105",
+          "name": "Banarasi Raw Silk Embroidered Kurta Set",
+          "price": 125,
+          "costPrice": 42,
+          "quantity": 1,
+          "size": "XL",
+          "color": "Maroon Gold",
+          "discount": 10
+        }
+      ],
+      "subtotal": 112.5,
+      "discountTotal": 12.5,
+      "tax": 13.5,
+      "total": 126,
+      "paymentMethod": "upi",
+      "paymentStatus": "Paid",
+      "cashier": "David Miller (Sales Executive)",
+      "profit": 70.5
+    },
+    {
+      "id": "INV-2026-8803",
+      "invoiceNo": "TC-INV-8803",
+      "date": "2026-09-02 10:45 AM",
+      "customerName": "Marcus Vance",
+      "customerPhone": "+1 (555) 789-2234",
+      "items": [
+        {
+          "id": "PRD-104",
+          "name": "Japanese Selvedge Denim Jeans (14oz)",
+          "price": 79,
+          "costPrice": 28,
+          "quantity": 1,
+          "size": "34",
+          "color": "Deep Indigo",
+          "discount": 0
+        },
+        {
+          "id": "PRD-103",
+          "name": "French Pure Linen Casual Trouser",
+          "price": 49,
+          "costPrice": 18.5,
+          "quantity": 2,
+          "size": "34",
+          "color": "Sand Beige",
+          "discount": 5
+        }
+      ],
+      "subtotal": 172.1,
+      "discountTotal": 4.9,
+      "tax": 20.65,
+      "total": 192.75,
+      "paymentMethod": "cash",
+      "paymentStatus": "Paid",
+      "cashier": "Sarah Jenkins (Store Mgr)",
+      "profit": 107.1
+    }
+  ],
+  "INITIAL_USERS": [
+    {
+      "id": "USR-01",
+      "username": "admin",
+      "password": "password123",
+      "name": "Vikramaditya Singhania",
+      "role": "Store Owner & Managing Director",
+      "roleKey": "admin",
+      "avatar": "👑",
+      "email": "director@threadcraft.com",
+      "permissions": [
+        "pos",
+        "purchase",
+        "profit",
+        "ledger",
+        "stages",
+        "measurement",
+        "booking",
+        "employee"
+      ]
+    },
+    {
+      "id": "USR-02",
+      "username": "cashier",
+      "password": "password123",
+      "name": "David Miller",
+      "role": "Head Sales Cashier",
+      "roleKey": "cashier",
+      "avatar": "🛍️",
+      "email": "david.cashier@threadcraft.com",
+      "permissions": [
+        "pos",
+        "booking",
+        "measurement"
+      ]
+    },
+    {
+      "id": "USR-03",
+      "username": "tailor",
+      "password": "password123",
+      "name": "Master Harun Rasheed",
+      "role": "Master Tailor & Production Lead",
+      "roleKey": "tailor",
+      "avatar": "✂️",
+      "email": "master.harun@threadcraft.com",
+      "permissions": [
+        "stages",
+        "measurement",
+        "booking"
+      ]
+    },
+    {
+      "id": "USR-04",
+      "username": "manager",
+      "password": "password123",
+      "name": "Pooja Mehta",
+      "role": "Operations & Accounts Manager",
+      "roleKey": "manager",
+      "avatar": "📊",
+      "email": "pooja.manager@threadcraft.com",
+      "permissions": [
+        "purchase",
+        "ledger",
+        "booking",
+        "employee",
+        "pos"
+      ]
+    }
+  ],
+  "INITIAL_VENDORS": [
+    {
+      "id": "VEN-01",
+      "name": "Vardhman Textile Mills Ltd.",
+      "contactPerson": "Rajesh Sharma",
+      "phone": "+91 98765 43210",
+      "email": "orders@vardhmanmills.com",
+      "city": "Ludhiana, Punjab",
+      "gstin": "03AABCV1234F1Z5",
+      "category": "Cotton & Linen Fabrics",
+      "balancePayable": 1450,
+      "rating": 4.8
+    },
+    {
+      "id": "VEN-02",
+      "name": "Biella Woolen Imports Inc.",
+      "contactPerson": "Marco Rossi",
+      "phone": "+1 800 555 9012",
+      "email": "supply@biellawools.com",
+      "city": "Milan / New York Hub",
+      "gstin": "07AABCB9876E1Z2",
+      "category": "Merino Wool & Suiting Fabrics",
+      "balancePayable": 3200,
+      "rating": 4.9
+    },
+    {
+      "id": "VEN-03",
+      "name": "A-One Haberdashery & Zippers",
+      "contactPerson": "Anil Gupta",
+      "phone": "+91 98112 34567",
+      "email": "sales@aonebuttons.com",
+      "city": "Surat, Gujarat",
+      "gstin": "24AAACA5555L1Z1",
+      "category": "Buttons, Zippers & Threads",
+      "balancePayable": 420,
+      "rating": 4.6
+    }
+  ],
+  "STAGES_LIST": [
+    {
+      "id": 1,
+      "name": "Fabric Sourcing & Inward",
+      "icon": "🧵",
+      "color": "#6366F1"
+    },
+    {
+      "id": 2,
+      "name": "Pattern Making & Cutting",
+      "icon": "✂️",
+      "color": "#EC4899"
+    },
+    {
+      "id": 3,
+      "name": "Stitching & Tailoring",
+      "icon": "🪡",
+      "color": "#F59E0B"
+    },
+    {
+      "id": 4,
+      "name": "Embroidery & Detailing",
+      "icon": "✨",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": 5,
+      "name": "Washing & Finishing",
+      "icon": "💨",
+      "color": "#06B6D4"
+    },
+    {
+      "id": 6,
+      "name": "Quality Check (QC Inspection)",
+      "icon": "🔍",
+      "color": "#10B981"
+    },
+    {
+      "id": 7,
+      "name": "Showroom / Ready Stock",
+      "icon": "🏷️",
+      "color": "#22C55E"
+    }
+  ]
+}
