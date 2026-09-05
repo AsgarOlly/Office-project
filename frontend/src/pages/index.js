@@ -1,0 +1,9 @@
+export { POSPage } from './POSPage';
+export { PurchasePage } from './PurchasePage';
+export { ProfitPage } from './ProfitPage';
+export { LedgerPage } from './LedgerPage';
+export { StagesPage } from './StagesPage';
+export { MeasurementPage } from './MeasurementPage';
+export { BookingPage } from './BookingPage';
+export { EmployeePage } from './EmployeePage';
+export { LoginPage } from './LoginPage';
